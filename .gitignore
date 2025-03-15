@@ -3,6 +3,8 @@
 .nrepl-port
 .clj-kondo/
 .lsp/
+.calva/
+.cpcache
 
 # Dependencies
 node_modules/
@@ -17,3 +19,4 @@ target/
 !public/**/*
 
 spec/
+resume*
