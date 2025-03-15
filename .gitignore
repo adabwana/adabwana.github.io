@@ -19,4 +19,4 @@ target/
 !public/**/*
 
 spec/
-resume*
+*.tex
