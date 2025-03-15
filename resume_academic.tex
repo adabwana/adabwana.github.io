@@ -1,0 +1,394 @@
+% Academic Resume Template
+\documentclass[11pt,letterpaper]{article}
+
+% Core packages
+\usepackage[empty]{fullpage}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{geometry}
+\usepackage{fontawesome5}
+\usepackage{titlesec}
+\usepackage[document]{ragged2e}
+\usepackage{etoolbox}
+
+% Professional typography settings
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% Page layout configuration
+\geometry{
+    top=0.75in,
+    bottom=0.75in,
+    left=0.75in,
+    right=0.75in
+}
+
+% Typography and spacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\renewcommand{\baselinestretch}{1.05}
+
+% Professional color scheme
+\definecolor{primaryblue}{RGB}{0,60,113}
+\definecolor{secondaryblue}{RGB}{0,90,170}
+\definecolor{accent}{RGB}{70,70,70}
+
+% Hyperlink configuration
+\hypersetup{
+    colorlinks=true,
+    urlcolor=secondaryblue,
+    linkcolor=primaryblue
+}
+
+% Section formatting
+\titleformat{\section}
+    {\Large\bfseries\scshape\raggedright}
+    {}{0em}
+    {}
+    [\vspace{-0.75em}\rule{\textwidth}{0.4pt}\vspace{-0.25em}]
+
+% Adjust section spacing
+\titlespacing*{\section}
+    {0pt}     % left margin
+    {12pt}     % space before
+    {6pt}     % space after
+
+% Subsection formatting
+\titleformat{\subsection}
+    {\large\bfseries\raggedright}
+    {}{0em}
+    {}
+\titlespacing*{\subsection}{0pt}{6pt}{2pt}
+
+% List configuration
+\setlist[itemize,1]{
+    noitemsep,
+    topsep=2pt,
+    leftmargin=*,
+    before={\vspace{-0.15em}},
+    after={\vspace{0.7em}}
+}
+
+\setlist[itemize,2]{
+    noitemsep,
+    % topsep=0pt,
+    leftmargin=*,
+    % before={\vspace{-0.15em}},
+    % after={\vspace{-1em}}
+}
+
+% Header command
+\newcommand{\header}[4]{
+    \begin{center}
+        {\Huge\textbf{#1}}\\[6pt]
+        {\color{accent}
+        \faEnvelope\ \href{mailto:#2}{#2} $|$ 
+        \faPhone\ #3 $|$ 
+        \faGithub\ \href{#4}{GitLab}}
+    \end{center}
+    \vspace{-1em}
+}
+
+\begin{document}
+
+% Header
+\header{JARYT SALVO}{adazungu@gmail.com}{(440) 396-2848}{https://gitlab.com/ds-w-clojure/projects-shell}
+
+% I. Academic Degrees
+\section{ACADEMIC DEGREES}
+
+\textbf{Bowling Green State University} \hfill \textbf{Bowling Green, OH}
+\begin{itemize}
+    \item \textbf{Doctor of Philosophy (PhD)} in Data Science \hfill \textbf{\textit{2024 -- Present}}
+    % \begin{itemize}
+    %     \item \textit{Research Focus}: Machine Learning Operations and Crime Pattern Analysis
+    %     \item Dissertation Topic: Forecasting Neighborhood-Level Crime Trends Using Prophet Models
+    % \end{itemize}
+    % \vspace{-1em}
+    \item \textbf{Master of Science} in Analytics \textit{(GPA: 4.0/4.0)} \hfill \textbf{\textit{2020 -- 2021}}
+    \item \textbf{Master of Arts} in Cross-Cultural and International Education \textit{(GPA: 4.0/4.0)} \hfill \textbf{\textit{2017 -- 2018}}
+    \item \textbf{Bachelor of Science} in Education, Minor in Mathematics \hfill \textbf{\textit{2011 -- 2014}}
+\end{itemize}
+
+% II. Academic Positions
+\section{ACADEMIC POSITIONS}
+
+% A. Teaching Positions
+% \subsection*{Teaching Positions}
+\textbf{Computer Science Lecturer} \hfill \textbf{\textit{Fall 2022 -- Fall 2023}} \\
+\textit{Eswatini Medical Christian University, Peace Corps Response}
+\begin{itemize}
+    \item Developed AI and Database courses with focus on R-based analytics
+    \item Created and managed course content through Google Classroom platform
+\end{itemize}
+
+\textbf{Assistant Language Teacher (ALT)} \hfill \textbf{\textit{Fall 2018 -- Fall 2020}} \\
+\textit{Japan Exchange and Teaching (JET) Program}
+\begin{itemize}
+    \item Developed comprehensive English curriculum for grades 3-9
+    \item Collaborated with Japanese faculty on innovative teaching approaches
+\end{itemize}
+
+\textbf{Special Education Paraprofessional} \hfill \textbf{\textit{Summer 2018}} \\
+\textit{Camp Imagine}
+\begin{itemize}
+    \item Managed small group activities based on target goals and objectives derived from students' IEPs
+\end{itemize}
+
+\textbf{Graduate Teaching Assistant} \hfill \textbf{\textit{Spring 2017}} \\
+\textit{College of Education and Human Development, BGSU}
+\begin{itemize}
+    \item Directed learning via reflection prompts on variety of topics such as: community assessment, positioning and physical accessibility, demographic analysis, agency goals, and impacts
+\end{itemize}
+
+\textbf{Secondary Mathematics and English Teacher} \hfill \textbf{\textit{June 2014 -- July 2016}} \\
+\textit{Peace Corps, Malawi}
+\begin{itemize}
+    \item Taught mathematics and English in resource-limited settings
+    \item Developed locally-adapted teaching materials and methodologies
+    \item Led community education initiatives including World Map Project
+    \item Mentored local teachers in educational best practices
+\end{itemize}
+
+% III. Non-academic Positions
+\section{NON-ACADEMIC POSITIONS}
+
+\textbf{Risk International} \hfill \textbf{\textit{October 2021 -- October 2022}} \\
+\textit{Data Analyst}
+\begin{itemize}
+    \item Developed and maintained Power BI dashboards for risk analysis
+    \item Created automated data pipelines for insurance claims processing
+    \item Implemented machine learning models for risk assessment
+\end{itemize}
+
+% IV. Teaching Experiences
+\section{TEACHING EXPERIENCES}
+
+\subsection*{Undergraduate Courses}
+
+\textbf{Eswatini Medical Christian University} \hfill \textbf{\textit{Fall 2023}}
+\begin{itemize}
+    \item MCS 105: Computer Foundation II
+    \begin{itemize}
+        \item Advanced computing concepts utilizing William Fawcett Hill's "Learning thru Discussion" format with 8-step process
+        \item Introduced functional programming with Clojure and covered databases, information systems, and cybersecurity
+    \end{itemize}
+    \item MCS 305: Artificial Intelligence I
+    \begin{itemize}
+        \item Comprehensive coverage of regression analysis from simple linear to polynomial models with hands-on R implementation
+        \item Developed practical skills through R scripts for variable selection, outlier analysis, and logistic regression
+    \end{itemize}
+\end{itemize}
+
+\textbf{Eswatini Medical Christian University} \hfill \textbf{\textit{Spring 2022}}
+\begin{itemize}
+    \item MCS 100: Computer Foundations I
+    \begin{itemize}
+        \item Core concepts in information technology, internet architecture, and system components
+        \item Practical applications in software systems, data storage, and network communications
+    \end{itemize}
+    \item MCS 301: Database Warehousing \& Mining
+    \begin{itemize}
+        \item Exploratory data analysis techniques with interactive R programming exercises and visualizations
+        \item Implemented statistical methods through R scripts covering resistant lines, median polish, and two-way plots
+    \end{itemize}
+    \item MCS 415: Artificial Intelligence II
+    \begin{itemize}
+        \item Advanced machine learning algorithms with hands-on implementation using R programming
+        \item Applied clustering, ensemble methods, and neural networks through guided R script walkthroughs
+    \end{itemize}
+\end{itemize}
+
+\textbf{Bowling Green State University} \hfill \textbf{\textit{Spring 2017}}
+\begin{itemize}
+    \item Field Experience in Cultural and Community Contexts
+    \begin{itemize}
+        \item Directed learning via reflection prompts on community assessment, physical accessibility, demographic analysis
+        \item Managed course learning management system
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Secondary Education}
+
+\textbf{Japan Exchange and Teaching Program} \hfill \textbf{\textit{2018 -- 2020}}
+\begin{itemize}
+    \item English as a Second Language (Grades 3-9)
+    \item Taught at five different schools
+\end{itemize}
+
+\textbf{Peace Corps, Malawi} \hfill \textbf{\textit{2014 -- 2016}}
+\begin{itemize}
+    \item Mathematics: Geometry, Algebra I \& II, Precalculus
+    \item English Language Arts
+\end{itemize}
+
+% VII. Academic Advising
+\section{ACADEMIC ADVISING}
+
+\textbf{Eswatini Medical Christian University} \hfill \textbf{\textit{2022 -- 2023}}
+\begin{itemize}
+    \item Advised student project on Library Management System for Eswatini National Library in Mbabane
+    \item Mentored student research on Facial Recognition for Drowsiness Detection in Driving Applications
+    \item Guided student development of Neural Network Architecture for Neurodegenerative Disease Detection using MRI Images
+\end{itemize}
+
+% VIII. Research Interests
+\section{RESEARCH INTERESTS}
+\begin{itemize}
+    \item Machine Learning Operations and Crime Pattern Analysis
+        \begin{itemize}
+            \item Recurrent Neural Networks for Sequential Modeling of Count Data
+            \item Applications in Spatio-temporal Crime Pattern Prediction
+        \end{itemize}
+    \item Statistical Computing and Functional Programming
+        \begin{itemize}
+            \item Lisp-family Languages (Clojure) for AI-compatible Functional Design
+            \item Immutable Data Structures and Concurrent Processing
+        \end{itemize}
+    \item Novel Machine Learning Paradigms
+        \begin{itemize}
+            \item Wolfram's Discrete Rule Array Models and Elementary Cellular Automata
+            \item Evolutionary Algorithms in Vertically Layered Rule Arrays
+        \end{itemize}
+    % \item Educational Technology and Data Analytics
+\end{itemize}
+
+% IX. Research Projects and Grants
+\section{RESEARCH PROJECTS AND GRANTS}
+
+\textbf{Graduate Research Assistant} \hfill \textbf{\textit{Spring 2024 -- Present}} \\
+\textit{Center for Justice Research, BGSU}
+\begin{itemize}
+    \item Lead researcher on Toledo Crime Analysis Project, developing MLOps pipelines and predictive models
+    \item Created interactive visualization tools for crime pattern analysis using R Shiny
+    \item Implemented Meta's Prophet model for time-series forecasting of neighborhood-level crime trends
+    \item Developed automated data processing pipelines for police department data
+\end{itemize}
+
+\textbf{Graduate Research Assistant} \hfill \textbf{\textit{Spring 2021 -- Summer 2021}} \\
+\textit{Office of International Programs \& Partnerships, BGSU}
+\begin{itemize}
+    \item Conducted research on international education programs and cross-cultural learning
+    \item Analyzed program effectiveness and student outcomes
+\end{itemize}
+
+\textbf{Graduate Research Assistant} \hfill \textbf{\textit{Summer 2017 -- Summer 2018}} \\
+\textit{Dean's Office of Assessment and Accreditation, BGSU}
+\begin{itemize}
+    \item Coordinated data collection and assessment for College of Education initiatives
+    \item Analyzed demographic data and program outcomes for accreditation purposes
+    \item Developed assessment tools for measuring educational effectiveness
+\end{itemize}
+
+% X. Publications or Equivalencies
+\section{PUBLICATIONS OR EQUIVALENCIES}
+
+\subsection*{Publications}
+   
+\textbf{Conference Presentations}
+\begin{itemize}
+    \item "Forecasting Crime Trends in Toledo, Ohio: A Prophet-Based Modeling Approach" \hfill \textbf{\textit{March 2025}} \\
+    \textit{Academy of Criminal Justice Science 62$^{nd}$ Annual Meeting}
+    \begin{itemize}
+        \item Presented research utilizing Meta's Prophet model for neighborhood-level crime forecasting
+        \item Analyzed six crime categories across Toledo census tracts using daily and monthly data
+        \item Demonstrated machine learning applications for law enforcement policy decisions
+    \end{itemize}
+\end{itemize}
+
+\textbf{Technical Blog Publication}
+\begin{itemize}
+    \item \href{https://www.linkedin.com/pulse/yet-another-machine-learning-operations-article-yano-malopa-salvo-tfa5c/}{"Brain Tumor Detection with Topological Data Analysis and MLOps"} \hfill \textbf{\textit{2024}}
+\end{itemize}
+
+\textbf{YouTube Presentations}
+\begin{itemize}
+    \item \href{https://www.youtube.com/watch?v=6OI5C2qv2Ic}{PCA in Clojure with Neanderthal} \hfill \textbf{\textit{2024}}
+    \item \href{https://www.youtube.com/watch?v=jPSfAPUtcms}{MLOps and Topological Analysis for Brain Tumor Detection} \hfill \textbf{\textit{2024}}
+    \item \href{https://www.youtube.com/watch?v=lM-S4-HRaTQ}{Mall Customer Cluster Analysis} \hfill \textbf{\textit{2021}}
+    \item \href{https://www.youtube.com/watch?v=oTqLzrN_n4k}{Regression Analysis: State Spending on Education} \hfill \textbf{\textit{2021}}
+    \item \href{https://www.youtube.com/watch?v=6ks-ipmTZww}{Power BI - Date Granularity Slicer} \hfill \textbf{\textit{2021}}
+    \item \href{https://www.youtube.com/watch?v=MVvIU2CgIeg}{Tableau - Dynamic Parameters} \hfill \textbf{\textit{2021}}
+    \item \href{https://www.youtube.com/watch?v=cGN9kq1gJQ4}{Absenteeism and Engagement} \hfill \textbf{\textit{2021}}
+\end{itemize}
+
+\subsection*{Equivalencies}
+   
+% \textbf{Product or Engineering Designs}
+\begin{itemize}
+    \item \textbf{Tract-Level Crime Forecasting with Prophet} \hfill \textbf{\textit{Spring 2025}}
+    \begin{itemize}
+        \item Developed time-series forecasting models for six crime categories across Toledo neighborhoods
+        \item Implemented Meta's Prophet model to capture seasonal patterns and holiday effects
+        \item Will be presenting findings at 2025 Academy of Criminal Justice Science Conference
+    \end{itemize}
+
+    \item \textbf{\href{https://adabwana.github.io/f24-cs7300-final-project/}{Statistical Computing in Clojure}} \hfill \textbf{\textit{Fall 2024}}
+    \begin{itemize}
+        \item Implemented PCA algorithms using functional programming paradigms
+        \item Developed statistical computing methods with focus on numerical stability
+        \item Created educational materials for functional programming in data science
+    \end{itemize}
+
+    \item \textbf{\href{https://adabwana.shinyapps.io/MapApp/}{Toledo Crime and Demographics Interactive Dashboard}} \hfill \textbf{\textit{Spring 2024}}
+    \begin{itemize}
+        \item Developed R Shiny application for visualizing crime and demographic patterns
+        \item Integrated police department data with census tract information
+        \item Created interactive maps and time-series visualizations
+    \end{itemize}
+\end{itemize}
+
+% XI. Papers Read to Professional Societies
+\section{PAPERS READ TO PROFESSIONAL SOCIETIES}
+
+\subsection*{Invited Papers}
+\begin{itemize}
+    \item "Forecasting Crime Trends in Toledo, Ohio: A Prophet-Based Modeling Approach" \\
+    \textit{Academy of Criminal Justice Science 62$^{nd}$ Annual Meeting} (Upcoming, 2025)
+\end{itemize}
+
+% XII. Service
+\section{SERVICE}
+
+\subsection*{Department}
+\begin{itemize}
+    \item Executive Director, EMCU TV YouTube Channel (2022-2023)
+    \item Created Electronic Journal Website for EMCU Publications (2023)
+\end{itemize}
+
+\subsection*{University}
+\begin{itemize}
+    \item Graduate Student Senate Representative, Department of Data Science (2024-Present)
+    \item Program Coordinator, Teaching Excellence and Achievement (TEA) Program (2018)
+    \item Program Coordinator, Young African Leaders Initiative (YALI) (2017)
+\end{itemize}
+
+\subsection*{Community}
+\begin{itemize}
+    \item Peace Corps Volunteer (Eswatini 2022-2023 \& Malawi 2014-2016)
+\end{itemize}
+
+% XIII. Research or Professional Consultantships
+\section{RESEARCH OR PROFESSIONAL CONSULTANTSHIPS}
+\begin{itemize}
+    \item Risk International - Data Analytics Consultant (2021-2022)
+    \begin{itemize}
+        \item Provided risk management data analysis and TCOR benchmarking
+        \item Developed insurance program management and reviews
+        \item Conducted strategic broker relationship management
+    \end{itemize}
+\end{itemize}
+
+% XIV. Membership in Professional Organizations
+\section{MEMBERSHIP IN PROFESSIONAL ORGANIZATIONS}
+
+\subsection*{Professional Affiliations}
+\begin{itemize}
+    \item Academy of Criminal Justice Science (2024-Present)
+    \item Graduate Student Senate, BGSU (2024-Present)
+    \item Japan Exchange and Teaching Alumni Association (2020-Present)
+    \item Peace Corps Alumni Association (2014-Present)
+\end{itemize}
+
+\end{document}

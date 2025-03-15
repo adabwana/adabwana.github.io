@@ -1,0 +1,60 @@
+<div class="card-body">
+  <h5 class="card-title">Crime Forecasting Code Sample (R)</h5>
+  <pre><code class="language-r">
+# Crime forecasting with Prophet
+library(prophet)
+library(dplyr)
+library(ggplot2)
+
+# Load crime data
+crime_data <- read.csv("toledo_crime_data.csv")
+
+# Prepare data for Prophet
+crime_df <- crime_data %>%
+  filter(crime_type == "Burglary") %>%
+  group_by(date = as.Date(date)) %>%
+  summarise(y = n()) %>%
+  rename(ds = date)
+
+# Create Prophet model
+m <- prophet(
+  seasonality.mode = "multiplicative",
+  yearly.seasonality = TRUE,
+  weekly.seasonality = TRUE,
+  daily.seasonality = FALSE
+)
+
+# Add holiday effects
+holidays <- data.frame(
+  holiday = c("July4th", "NewYear", "Christmas"),
+  ds = as.Date(c("2023-07-04", "2023-01-01", "2023-12-25")),
+  lower_window = c(-1, -1, -1),
+  upper_window = c(1, 1, 1)
+)
+m <- add_country_holidays(m, country_name = "US")
+
+# Fit model
+m <- fit.prophet(m, crime_df)
+
+# Make future predictions
+future <- make_future_dataframe(m, periods = 90)
+forecast <- predict(m, future)
+
+# Plot forecast
+plot(m, forecast) +
+  labs(
+    title = "90-Day Burglary Forecast for Toledo",
+    subtitle = "Using Prophet Time Series Model",
+    y = "Number of Incidents",
+    x = "Date"
+  )
+
+# Plot components
+prophet_plot_components(m, forecast)
+  </code></pre>
+  <div class="text-end mt-3">
+    <button class="btn btn-outline-primary" hx-get="/htmx/project-details.html" hx-target="#project-container" hx-swap="innerHTML">
+      Back to Description
+    </button>
+  </div>
+</div> 

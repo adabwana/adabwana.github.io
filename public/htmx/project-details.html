@@ -1,0 +1,32 @@
+<!-- Project Details Template -->
+<div class="card mb-4">
+  <div class="card-body">
+    <h4 class="card-title">Crime Forecasting with Prophet</h4>
+    <p class="card-text">
+      This project uses Meta's Prophet model to forecast crime patterns across different neighborhoods in Toledo, Ohio.
+      The model incorporates seasonal trends and holiday effects to provide accurate predictions for law enforcement resource allocation.
+    </p>
+    <h5 class="mt-4">Technical Details</h5>
+    <ul>
+      <li>Time series forecasting using Prophet model from Meta</li>
+      <li>R-based implementation with Shiny visualization dashboard</li>
+      <li>Census tract-level analysis of six major crime categories</li>
+      <li>Integration with demographic data for contextual analysis</li>
+    </ul>
+    <h5 class="mt-4">Key Findings</h5>
+    <ul>
+      <li>Discovered weekly and monthly seasonality patterns in property crimes</li>
+      <li>Identified neighborhood-specific trends that correlate with demographic factors</li>
+      <li>Developed visualization techniques for communicating insights to stakeholders</li>
+    </ul>
+    <div class="text-end mt-4">
+      <button class="btn btn-outline-secondary" hx-get="/htmx/project-code-sample.html" hx-target="#code-sample" hx-swap="innerHTML">
+        View Code Sample
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="code-sample" class="card mb-4">
+  <!-- Code sample will be loaded here -->
+</div> 

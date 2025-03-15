@@ -1,0 +1,19 @@
+# Development files
+.shadow-cljs/
+.nrepl-port
+.clj-kondo/
+.lsp/
+
+# Dependencies
+node_modules/
+target/
+
+# Keep GitHub specific files
+!.github/
+!.gitignore
+
+# Keep public directory for GitHub Pages
+!public/
+!public/**/*
+
+spec/

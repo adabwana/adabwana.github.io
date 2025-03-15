@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Runner</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 2rem;
+            line-height: 1.5;
+        }
+        .pass { color: #2ecc71; }
+        .fail { color: #e74c3c; }
+        .pending { color: #f1c40f; }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h2>Running Speclj Tests...</h2>
+        <div id="test-output"></div>
+    </div>
+    <script src="/js/main.js"></script>
+    <script>
+        speclj.runner.run();
+    </script>
+</body>
+</html>

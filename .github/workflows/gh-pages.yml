@@ -1,0 +1,37 @@
+name: GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    
+    - name: Setup Java
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+    
+    - name: Setup Clojure tools
+      uses: DeLaGuardo/setup-clojure@master
+      with:
+        cli: latest
+        
+    - name: Build ClojureScript
+      run: |
+        npm install shadow-cljs -g
+        npm install
+        npx shadow-cljs release app
+      
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@4.1.5
+      with:
+        branch: gh-pages
+        folder: public 

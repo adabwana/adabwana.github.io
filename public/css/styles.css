@@ -1,0 +1,123 @@
+/* Custom styles for Jaryt Salvo's personal website */
+
+:root {
+  --primary-blue: #0a4b87;
+  --secondary-blue: #0574aa;
+  --accent-color: #f8a51b;
+  --light-gray: #f4f6f9;
+  --dark-gray: #343a40;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background-color: var(--light-gray);
+}
+
+/* Override Bootstrap primary color */
+.bg-primary {
+  background-color: var(--primary-blue) !important;
+}
+
+.btn-primary {
+  background-color: var(--primary-blue);
+  border-color: var(--primary-blue);
+}
+
+.btn-primary:hover {
+  background-color: var(--secondary-blue);
+  border-color: var(--secondary-blue);
+}
+
+.btn-outline-primary {
+  color: var(--primary-blue);
+  border-color: var(--primary-blue);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-blue);
+  border-color: var(--primary-blue);
+}
+
+/* Header styles */
+.navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Card customization */
+.card {
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+.card-title {
+  color: var(--primary-blue);
+  font-weight: 600;
+}
+
+/* List customization */
+.list-group-item {
+  border-left: none;
+  border-right: none;
+}
+
+/* Project cards */
+.projects-page .card {
+  height: 100%;
+}
+
+/* Links */
+a {
+  color: var(--secondary-blue);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--primary-blue);
+  text-decoration: underline;
+}
+
+/* Footer */
+footer {
+  border-top: 1px solid #e5e5e5;
+}
+
+/* Code highlighting */
+pre {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  border: 1px solid #e9ecef;
+  margin-bottom: 1.5rem;
+}
+
+code {
+  font-family: 'Fira Code', 'Courier New', Courier, monospace;
+}
+
+/* Media queries */
+@media (max-width: 767.98px) {
+  .display-4 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Animation for page transitions */
+.page-enter {
+  opacity: 0;
+}
+
+.page-enter-active {
+  opacity: 1;
+  transition: opacity 300ms;
+} 

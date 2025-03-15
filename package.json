@@ -1,0 +1,21 @@
+{
+  "name": "adabwana-github-io",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Professional data science portfolio for Jaryt Salvo",
+  "scripts": {
+    "watch": "shadow-cljs watch app",
+    "release": "shadow-cljs release app",
+    "server": "shadow-cljs server",
+    "clean": "rm -rf target && rm -rf public/js"
+  },
+  "devDependencies": {
+    "shadow-cljs": "^2.28.21"
+  },
+  "dependencies": {
+    "highlight.js": "^11.7.0",
+    "htmx.org": "^1.9.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}
