@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found | Jaryt Salvo</title>
+    <meta name="description" content="Professional portfolio of Jaryt Salvo, a data scientist and machine learning engineer.">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Custom styles -->
+    <link href="/css/styles.css" rel="stylesheet">
+    
+    <script type="text/javascript">
+        // Redirect to main app and let the router handle the 404
+        window.onload = function() {
+            // Check if we're not on the root path already
+            if (window.location.pathname !== '/') {
+                // Store the attempted URL as a query parameter
+                var encodedPath = encodeURIComponent(window.location.pathname);
+                window.location.href = '/?path=' + encodedPath;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center mt-5">
+                <h1 class="display-1 text-primary">404</h1>
+                <h2 class="mb-4">Page Not Found</h2>
+                <p class="lead mb-4">The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+                <a href="/" class="btn btn-primary btn-lg">Go to Homepage</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
