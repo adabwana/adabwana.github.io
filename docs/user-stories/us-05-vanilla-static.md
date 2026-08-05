@@ -183,6 +183,7 @@ python3 -m http.server -d public   # then curl each route
 | Cleaner | `2439951` | Cleanup: dead field, dedup links, formatting, lockfile |
 | Architect | `cc66c71` | PASS — boundaries, dependency direction, pure core/host separation, relative links, acyclic graph; evidence in Architecture review below |
 | Hardender | `b63f9fa` | PASS — output parity, link integrity, no-framework guard, data parity + regeneration byte-identical; added 9 hardening specs (negative cases, escaping invariants, link invariants); see Hardening review below |
+| QA | `(this commit)` | PASS — independent user-surface verification over HTTP of all seven static-site feature scenarios; see QA evidence below |
 
 ## Hardening review (hardender gate)
 
@@ -246,6 +247,34 @@ Reviewed merged HEAD (`cc66c71` = impl `2439951` + accepted spec `5e050e2`).
 npx shadow-cljs release static && node target/static/main.js
 python3 -m http.server -d public   # then curl each route
 ```
+
+## QA evidence (QA gate)
+
+QA verified independently through the real user surface (served static site
+over HTTP, per `qa/procedures/static-site.qa.md`):
+
+* `npx shadow-cljs release static` compiles clean (0 warnings); the Node
+  entrypoint regenerates the four `public/` route files byte-identical to
+  committed (deterministic output).
+* All seven feature scenarios pass. `/`, `/about/`, `/projects/`,
+  `/hms-student-highlights/` each serve 200 `text/html` over HTTP; content
+  renders with JS disabled (curl, zero framework references in HTML or the
+  compiled bundle).
+* All 38 internal hrefs/src resolve (31 direct 200, 7 clean 301-to-200
+  directory redirects); the three `public/resume/*.pdf` endpoints resolve 200
+  as valid PDFs (full 3-page, onepage 1-page, industry 2-page);
+  styles/headshot 200.
+* `data.cljs` sha256 `bbe8f49b` is byte-identical to pre-migration; all US-03
+  content strings (teaching courses + units, student names and project
+  titles) present in the generated pages.
+* Code-level gates: `static.cljc` pure CLJC (only `clojure.string`); `core.cljs`
+  the sole host writer; no event handlers/atoms/`js/` interop in
+  `components`/`pages`/`layout`/`routes`; link/data targets declared once and
+  rendered via helpers; no stale academic resume reference. `clojure -M:test`
+  32/32 green.
+* Residual: legacy `public/404.html` redirect, `public/test/` runner,
+  `public/htmx/*` orphans, and the `/about#presentations` anchor are
+  parity-preserved and out of the accepted scope.
 
 ## Residual risk
 
