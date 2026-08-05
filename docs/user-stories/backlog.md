@@ -26,7 +26,7 @@ generated:
 
 | Order | ID | Story | Status | Depends on |
 |------:|----|-------|--------|------------|
-| 1 | US-01 | Refresh resume download PDFs (industry + full) | awaiting-approval | none |
+| 1 | US-01 | Refresh resume download PDFs (industry + full) | done | none |
 | 2 | US-02 | Add AMN workforce-strategy one-pager download | backlog | US-01 |
 
 ## Parallel candidates

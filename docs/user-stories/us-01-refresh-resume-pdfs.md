@@ -11,7 +11,7 @@ generated:
 
 # US-01 Refresh resume download PDFs
 
-**Status:** awaiting-approval
+**Status:** done
 **Pack:** trimmed (specifier -> coder -> cleaner -> QA)
 **Depends on:** none
 **Design:** industry + full resume PDFs under `public/resume/`
@@ -90,12 +90,14 @@ cd ~/Documents/projects/resume/typst && typst compile resume_industry.typ && typ
 
 | Stage | Commit | Result |
 |-------|--------|--------|
-| Specifier | pending | pending |
-| Coder | pending | pending |
-| Cleaner | pending | pending |
-| QA | pending | pending |
+| Specifier | `0a42cd02` | Spec + engineering gates approved |
+| Coder | `a373dea1` | Implemented: PDFs rendered, links via declared map, academic removed |
+| Cleaner | `b12e6def` | Cleanup: helper extraction, dead code removed (`xxxcore.cljs`), comment fix |
+| QA | `b12e6def` (verified) | PASS — all acceptance criteria + gates; no changes needed |
+| Merge | `f9222b9` | Merged to main; deployed by gh-pages on push |
 
 ## Residual risk
 
-* Typst package versions (`basic-resume`, `fontawesome`) must resolve on this
-  machine at render time.
+* shadow-cljs release has run-to-run symbol-ordering nondeterminism in
+  `public/js/main.js` (QA observation, no behavior impact).
+* Typst package versions must resolve at render time (rendered 2026-08-05).
