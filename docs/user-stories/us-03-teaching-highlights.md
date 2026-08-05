@@ -11,9 +11,9 @@ generated:
 
 # US-03 Current teaching work + HMS student highlights page
 
-**Status:** backlog
+**Status:** done
 **Pack:** trimmed (specifier -> coder -> cleaner -> QA)
-**Depends on:** US-02 (backlog)
+**Depends on:** US-02 (done)
 **Design:** two new surface additions — a Teaching/Current Work section and a
 single **HMS Student Highlights** page with year + trimester sectioning.
 
@@ -132,8 +132,8 @@ npx shadow-cljs release app
 | Specifier | `ca83494` | Spec + feature + QA procedure + source data approved |
 | Coder | `89c5c96` | Implemented: `:teaching`/`:student-highlights` data maps, highlights page + route, teaching section |
 | Cleaner | `e01522b` | Cleanup: unused requires removed, EOF newlines, no behavior change |
-| QA | `e01522b` (verified) | PASS — build clean, all scenarios through rendered UI, 10 links 200 + `target="_blank"`, code gates; no changes needed |
-| Merge | pending | pending |
+| QA | `db14829` | PASS — build clean, all scenarios through rendered UI, 10 links 200 + `target="_blank"`, code gates |
+| Merge | `a5b8776` | Merged to main; deployed by gh-pages on push |
 
 ## Residual risk
 
