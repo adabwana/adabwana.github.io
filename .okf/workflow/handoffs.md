@@ -3,6 +3,13 @@ type: Workflow
 title: Handoff protocol
 description: Durable file-based handoffs that reference committed states.
 tags: [workflow, handoffs, git]
+status: stable
+generated:
+  by: opencode/opencode
+  at: 2026-08-05T00:00:00Z
+verified:
+  - by: human:adazungu
+    at: 2026-08-05T00:00:00Z
 ---
 
 # Git handoff

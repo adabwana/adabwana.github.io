@@ -3,6 +3,13 @@ type: Workflow
 title: Commit discipline
 description: Audit-friendly commit rules for agentic delivery.
 tags: [workflow, git, commits]
+status: stable
+generated:
+  by: opencode/opencode
+  at: 2026-08-05T00:00:00Z
+verified:
+  - by: human:adazungu
+    at: 2026-08-05T00:00:00Z
 ---
 
 # One responsibility

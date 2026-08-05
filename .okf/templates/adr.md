@@ -3,6 +3,10 @@ type: Template
 title: Architecture decision record template
 description: Durable decision record for boundaries and tradeoffs.
 tags: [template, architecture, adr]
+status: draft
+generated:
+  by: human:adazungu
+  at: 2026-08-05T00:00:00Z
 ---
 
 # ADR-<NN> <decision title>

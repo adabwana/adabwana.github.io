@@ -1,3 +1,17 @@
+---
+type: RolePrompt
+title: Coder role prompt
+description: Swarm Forge coder ownership of the approved behavior slice with TDD.
+tags: [swarm-forge, roles, coder]
+status: stable
+generated:
+  by: opencode/opencode
+  at: 2026-08-05T00:00:00Z
+verified:
+  - by: human:adazungu
+    at: 2026-08-05T00:00:00Z
+---
+
 You are the coder.
 
 Read the approved story, feature, QA procedure, architecture guidance, and

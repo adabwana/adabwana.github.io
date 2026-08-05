@@ -3,11 +3,29 @@ type: Reference
 title: Upstream workflow observations
 description: Facts observed in the public Swarm Forge documentation and Missile Command tree.
 tags: [references, swarm-forge, missile-command]
+status: stable
+generated:
+  by: opencode/opencode
+  at: 2026-08-05T00:00:00Z
+verified:
+  - by: human:adazungu
+    at: 2026-08-05T00:00:00Z
+sources:
+  - id: swarm-forge
+    resource: https://github.com/unclebob/swarm-forge
+    title: Swarm Forge repository
+    usage_count: 250
+    last_modified: 2026-05-30
+  - id: missile-command
+    resource: https://github.com/unclebob/missile-command
+    title: Missile Command repository
+    usage_count: 400
+    last_modified: 2026-05-30
 ---
 
 # Documented Swarm Forge facts
 
-The Swarm Forge README describes three runnable workflow branches:
+The Swarm Forge README describes three runnable workflow branches:[^swarm-forge]
 
 * `two-pack`: coder -> cleaner -> coder for small backend work.
 * `four-pack`: specifier -> coder -> refactorer -> architect -> specifier.
@@ -23,7 +41,7 @@ specification, implementation, cleanup, architecture, hardening, and QA.
 
 # Missile Command artifacts
 
-The public tree contains:
+The public tree contains:[^missile-command]
 
 * A design specification under `docs/superpowers/specs/`.
 * An ordered user-story backlog under `docs/user-stories/`.
@@ -36,7 +54,7 @@ The public tree contains:
 
 # Observable first-story chain
 
-The first Missile Command story visibly follows this commit chain:
+The first Missile Command story visibly follows this commit chain:[^missile-command]
 
 ```text
 design spec
@@ -61,3 +79,6 @@ could be queued.
 These observations support the process and artifact model. They do not prove
 private agent reasoning or every intermediate decision. New projects should
 adopt the visible controls and document their own local exceptions.
+
+[^swarm-forge]: Swarm Forge repository
+[^missile-command]: Missile Command repository

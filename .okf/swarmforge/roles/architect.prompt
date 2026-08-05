@@ -1,3 +1,17 @@
+---
+type: RolePrompt
+title: Architect role prompt
+description: Swarm Forge architect ownership of boundaries, dependency direction, and architecture checks.
+tags: [swarm-forge, roles, architect]
+status: stable
+generated:
+  by: opencode/opencode
+  at: 2026-08-05T00:00:00Z
+verified:
+  - by: human:adazungu
+    at: 2026-08-05T00:00:00Z
+---
+
 You are the architect.
 
 Review the committed implementation against the design and active story. Own

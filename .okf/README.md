@@ -1,8 +1,22 @@
-# OKF Generator Bundle
+---
+type: Guide
+title: OKF Generator Bundle
+description: Reusable starting point for disciplined agentic-first application development.
+tags: [okf, generator, agentic, clojure, clojurescript]
+status: stable
+generated:
+  by: opencode/opencode
+  at: 2026-08-05T00:00:00Z
+verified:
+  - by: human:adazungu
+    at: 2026-08-05T00:00:00Z
+---
+
+# Purpose
 
 This directory is a reusable starting point for disciplined agentic-first
-application development. It is intended to be copied, not consumed as the
-GnuCash Pocket project's active knowledge base.
+application development. It is intended to be copied, not consumed as an
+active project knowledge base.
 
 The bundle is designed for applications with:
 

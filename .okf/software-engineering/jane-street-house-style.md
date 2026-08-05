@@ -1,71 +1,105 @@
 ---
 type: Guideline
 title: Jane Street house style
-description: Readability- and type-driven house style distilled from Jane Street practice, adapted for Kotlin.
+description: Readability- and type-driven house style distilled from Jane Street practice, adapted for Clojure.
 tags: [jane-street, house-style, readability, types, code-review]
-timestamp: 2026-07-19T00:00:00Z
+status: stable
+generated:
+  by: opencode/opencode
+  at: 2026-08-05T00:00:00Z
+verified:
+  - by: human:adazungu
+    at: 2026-08-05T00:00:00Z
+sources:
+  - id: caml-trading
+    resource: https://cs.rice.edu/~javaplt/411/23-spring/NewReadings/functional_programming_on_Wall_Street.pdf
+    title: Minsky & Weeks, Caml trading (JFP 2008)
+    author: team:jane-street
+    last_modified: 2008
+  - id: ocaml-masses
+    resource: https://plv.mpi-sws.org/plerg/papers/minsky-ocaml-masses.pdf
+    title: Minsky, OCaml for the Masses
+    author: team:jane-street
+    last_modified: 2007
+  - id: ppx-js-style
+    resource: https://ocaml.org/p/ppx_js_style/latest
+    title: Jane Street ppx_js_style README
+    last_modified: 2026-05-30
 ---
 
 # Central thesis
 
-Write code that is **easy to review and hard to misuse**: terse without cryptic, immutable by default, illegal states unrepresentable, case analysis exhaustive, modules over inheritance theater.
+Write code that is **easy to review and hard to misuse**: terse without
+cryptic, immutable by default, illegal states unrepresentable, case analysis
+exhaustive, modules over inheritance theater.
 
-Jane Street’s published practice is OCaml-centric (`ppx_js_style`, Core). We adopt the *ethic*, not the language.
+Jane Street’s published practice is OCaml-centric (`ppx_js_style`, Core). We
+adopt the *ethic*, not the language.
 
-# House rules (ported)
+# House rules
 
 ## Readability and review
 
-* Optimize for the human who must prove the code correct in review (including non-specialists).
-* Prefer short, clear expressions; reject boilerplate duplication — reviewers skim repeats and miss bugs.
-* Factor shared logic with functions/higher-order helpers rather than copy-paste.
+* Optimize for the human who must prove the code correct in review (including
+  non-specialists).
+* Prefer short, clear expressions; reject boilerplate duplication — reviewers
+  skim repeats and miss bugs.
+* Factor shared logic with functions/higher-order helpers rather than
+  copy-paste.
 
 ## Immutability
 
-* Immutable data is the default; imperative updates are local, justified, and obvious.
-* Make interactions between components explicit (passed values), not ambient mutable globals.
+* Immutable data is the default; imperative updates are local, justified, and
+  obvious.
+* Make interactions between components explicit (passed values), not ambient
+  mutable globals.
 
 ## Make illegal states unrepresentable
 
-* Prefer types that cannot express invalid combinations (e.g. unbalanced transaction drafts as a distinct type from posted transactions when converting models).
-* Use sealed hierarchies / enums with payloads instead of parallel nullable fields that “shouldn’t both be set.”
+* Prefer types that cannot express invalid combinations.
+* Use sealed hierarchies / enums with payloads instead of parallel nullable
+  fields that “shouldn’t both be set.”
 
 ## Exhaustive case analysis
 
-* Prefer `when` / sealed `when` without silent `else` that swallows new cases.
-* When adding a variant, the compiler should force call-site updates — that is a feature.
+* Prefer `case`/`cond` without silent `else` that swallows new cases.
+* When adding a variant, the compiler should force call-site updates — that is
+  a feature.
 * Avoid wildcard matches that hide unfinished work.
 
 ## Errors as values at boundaries
 
-* Prefer explicit success/failure sum types over exception-only control flow for expected failures (parse errors, validation).
-* Reserve exceptions for truly exceptional / unrecoverable paths.
-* Kotlin: `Result`, sealed error types, or domain-specific outcomes — be consistent per layer.
+* Prefer explicit success/failure outcomes over exception-only control flow for
+  expected failures (parse errors, validation).
+* Reserve exceptions for truly exceptional / unrecoverable paths.[^caml-trading]
 
 ## Named arguments and clarity
 
-* When multiple parameters share a type (`String`, `Long`, `BigDecimal`), use named arguments at call sites.
-* Label lambdas’ intent when passed to higher-order helpers.
+* When multiple parameters share a type, use named arguments at call sites.
+* Label function intent when passing it to higher-order helpers.
 
 ## Modularity without inheritance webs
 
 * Prefer composition, interfaces, and clear module boundaries.
-* Avoid deep inheritance for code reuse; Jane Street reviewers found inheritance hard to reason about — same risk in Java/Kotlin UI base classes. Keep `BaseDrawerActivity`-style bases thin.
+* Avoid deep inheritance for code reuse; reviewers find inheritance hard to
+  reason about.
 
 ## Types carry proof
 
-* Encode invariants in types where cheap (non-empty ids, commodity codes, money scaled decimals).
-* Push as much of the informal correctness proof into the typechecker as practical.
+* Encode invariants in types where cheap (non-empty ids, commodity codes,
+  money scaled decimals).
+* Push as much of the informal correctness proof into the typechecker as
+  practical.
 
-## Tooling echoes (`ppx_js_style` spirit)
+## Tooling echoes
 
-OCaml-specific lints still teach intent:
+The `ppx_js_style` README still teaches intent:
 
-| Jane Street lint idea | Kotlin analogue |
+| Jane Street lint idea | Clojure analogue |
 |-----------------------|-----------------|
-| Annotated ignores | No bare `_` discards of important `Result` / cursors without comment or typed ignore |
-| Doc vs noise comments | KDoc on public APIs; no narrating comments |
-| Dated deprecations | `@Deprecated` with replace-with and removal plan |
+| Annotated ignores | No bare `_` discards of important results without comment or typed ignore |
+| Doc vs noise comments | Docstrings on public fns; no narrating comments |
+| Dated deprecations | `^:deprecated` / removal plan |
 | Forbid clever inline/attrs noise | Prefer clear structure over micro-opts |
 
 # Overlap with Uncle Bob
@@ -78,14 +112,9 @@ OCaml-specific lints still teach intent:
 | Modules over inheritance | DIP / composition |
 | Exhaustive matches | OCP by addition of variants |
 
-# Related
+These rules adapt Jane Street's published ethics: *Caml trading*,[^caml-trading]
+*OCaml for the Masses*,[^ocaml-masses] and `ppx_js_style`.[^ppx-js-style]
 
-* [functional-design](/software-engineering/functional-design.md)
-* [clean-code](/software-engineering/clean-code.md)
-* [apply-to-kotlin-android](/software-engineering/apply-to-kotlin-android.md)
-
-# Citations
-
-[1] Yaron Minsky & Stephen Weeks, *Caml trading – experiences with functional programming on Wall Street* (JFP 2008)
-[2] Yaron Minsky, *OCaml for the Masses* (ACM Queue / related essay)
-[3] Jane Street `ppx_js_style` README — https://ocaml.org/p/ppx_js_style/latest
+[^caml-trading]: Minsky & Weeks, Caml trading (JFP 2008)
+[^ocaml-masses]: Minsky, OCaml for the Masses
+[^ppx-js-style]: Jane Street ppx_js_style README

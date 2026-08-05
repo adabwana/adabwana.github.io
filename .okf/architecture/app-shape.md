@@ -3,6 +3,13 @@ type: Architecture
 title: Desktop and browser application shape
 description: Reference layout for a shared Clojure/ClojureScript application.
 tags: [architecture, clj, cljs, cljc, desktop, browser]
+status: stable
+generated:
+  by: opencode/opencode
+  at: 2026-08-05T00:00:00Z
+verified:
+  - by: human:adazungu
+    at: 2026-08-05T00:00:00Z
 ---
 
 # Runtime model

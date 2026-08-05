@@ -3,6 +3,13 @@ type: Workflow
 title: Swarm Forge pack selection
 description: Choose orchestration depth according to risk and verification needs.
 tags: [swarm-forge, packs, workflow]
+status: stable
+generated:
+  by: opencode/opencode
+  at: 2026-08-05T00:00:00Z
+verified:
+  - by: human:adazungu
+    at: 2026-08-05T00:00:00Z
 ---
 
 # Two-pack

@@ -1,4 +1,13 @@
-# Project-local article template
+---
+type: Prompt
+title: Project-local article template
+description: Template for the project shape constitution article.
+tags: [constitution, project, template]
+status: draft
+generated:
+  by: human:adazungu
+  at: 2026-08-05T00:00:00Z
+---
 
 ## Project shape
 

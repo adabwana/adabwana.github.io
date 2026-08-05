@@ -3,6 +3,13 @@ type: Workflow
 title: Story lifecycle
 description: Gated delivery cycle based on the documented Missile Command flow.
 tags: [workflow, stories, lifecycle]
+status: stable
+generated:
+  by: opencode/opencode
+  at: 2026-08-05T00:00:00Z
+verified:
+  - by: human:adazungu
+    at: 2026-08-05T00:00:00Z
 ---
 
 # Story states

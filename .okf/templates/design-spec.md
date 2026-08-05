@@ -3,6 +3,10 @@ type: Template
 title: Product design specification template
 description: Up-front product, architecture, and verification contract.
 tags: [template, design, specification]
+status: draft
+generated:
+  by: human:adazungu
+  at: 2026-08-05T00:00:00Z
 ---
 
 # <Project> design specification

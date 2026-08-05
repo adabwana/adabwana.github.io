@@ -3,6 +3,10 @@ type: Template
 title: Ordered story backlog template
 description: Dependency-aware story list for one-at-a-time Swarm Forge execution.
 tags: [template, backlog, stories]
+status: draft
+generated:
+  by: human:adazungu
+  at: 2026-08-05T00:00:00Z
 ---
 
 # <Project> backlog

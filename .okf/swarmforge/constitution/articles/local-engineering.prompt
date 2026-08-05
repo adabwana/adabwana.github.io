@@ -1,3 +1,14 @@
+---
+type: Prompt
+title: Local engineering template article
+description: Template for project-specific engineering commands.
+tags: [constitution, engineering, template]
+status: draft
+generated:
+  by: human:adazungu
+  at: 2026-08-05T00:00:00Z
+---
+
 # Local engineering template
 
 * <project-specific language and formatting command>

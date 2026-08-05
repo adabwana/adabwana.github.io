@@ -3,6 +3,13 @@ type: Guideline
 title: Architecture and dependency rule
 description: Boundaries, information hiding, and public facade rules for shared applications.
 tags: [architecture, dependency-rule, modules, clojure]
+status: stable
+generated:
+  by: opencode/opencode
+  at: 2026-08-05T00:00:00Z
+verified:
+  - by: human:adazungu
+    at: 2026-08-05T00:00:00Z
 ---
 
 # Dependency direction

@@ -3,6 +3,13 @@ type: WorkflowIntegration
 title: Generic agent adapter contract
 description: Backend-neutral launch contract for Swarm Forge agents.
 tags: [swarm-forge, adapter, backend, opencode2]
+status: stable
+generated:
+  by: opencode/opencode
+  at: 2026-08-05T00:00:00Z
+verified:
+  - by: human:adazungu
+    at: 2026-08-05T00:00:00Z
 ---
 
 # Purpose

@@ -1,3 +1,17 @@
+---
+type: Prompt
+title: Shared handoff rules article
+description: Common handoff protocol enacted by every role.
+tags: [constitution, handoffs]
+status: stable
+generated:
+  by: opencode/opencode
+  at: 2026-08-05T00:00:00Z
+verified:
+  - by: human:adazungu
+    at: 2026-08-05T00:00:00Z
+---
+
 # Shared handoff rules
 
 Use drafts with this shape:

@@ -3,6 +3,13 @@ type: Workflow
 title: Repository artifacts
 description: Modular source and generated artifact layout for a new project.
 tags: [workflow, artifacts, repository]
+status: stable
+generated:
+  by: opencode/opencode
+  at: 2026-08-05T00:00:00Z
+verified:
+  - by: human:adazungu
+    at: 2026-08-05T00:00:00Z
 ---
 
 # Recommended layout

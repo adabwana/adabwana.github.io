@@ -3,6 +3,13 @@ type: TestingGuideline
 title: Testing strategy
 description: Separate tests by purpose and environmental boundary.
 tags: [testing, tdd, gherkin, property, mutation, qa]
+status: stable
+generated:
+  by: opencode/opencode
+  at: 2026-08-05T00:00:00Z
+verified:
+  - by: human:adazungu
+    at: 2026-08-05T00:00:00Z
 ---
 
 # Test layers

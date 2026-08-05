@@ -1,13 +1,20 @@
 ---
-type: GeneratorGuide
-title: Copying the OKF generator bundle
+type: Guide
+title: Copy guide
 description: Adaptation steps for installing this reusable bundle in a new project.
 tags: [okf, generator, adoption]
+status: stable
+generated:
+  by: opencode/opencode
+  at: 2026-08-05T00:00:00Z
+verified:
+  - by: human:adazungu
+    at: 2026-08-05T00:00:00Z
 ---
 
 # Copy
 
-Copy `.okf-gen/` into the new repository. Keep it as a versioned reference or
+Copy this bundle into the new repository. Keep it as a versioned reference or
 rename it to the project's active knowledge directory after reviewing the
 contents. Do not copy project-specific facts from another repository.
 

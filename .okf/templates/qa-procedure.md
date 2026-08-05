@@ -3,6 +3,10 @@ type: Template
 title: End-to-end QA procedure template
 description: Independent user-surface procedure corresponding to one feature.
 tags: [template, qa, acceptance]
+status: draft
+generated:
+  by: human:adazungu
+  at: 2026-08-05T00:00:00Z
 ---
 
 # QA: <feature title>

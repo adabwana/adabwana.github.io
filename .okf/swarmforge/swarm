@@ -34,7 +34,7 @@ if [[ ! -d "$SCRIPT_DIR/swarmforge/scripts" || ! -d "$SCRIPT_DIR/swarmforge/scri
   fi
 fi
 
-PATCH_FILE="$SCRIPT_DIR/.okf-gen/swarmforge/patches/generic-agent-adapter.patch"
+PATCH_FILE="$SCRIPT_DIR/.okf/swarmforge/patches/generic-agent-adapter.patch"
 if [[ -f "$PATCH_FILE" && -f "$SCRIPT_DIR/swarmforge/scripts/swarmforge.bb" ]]; then
   if ! grep -q '"adapter"' "$SCRIPT_DIR/swarmforge/scripts/swarmforge.bb"; then
     command -v patch >/dev/null 2>&1 || {
@@ -45,13 +45,13 @@ if [[ -f "$PATCH_FILE" && -f "$SCRIPT_DIR/swarmforge/scripts/swarmforge.bb" ]]; 
   fi
 fi
 
-SHELL_PATCH_FILE="$SCRIPT_DIR/.okf-gen/swarmforge/patches/bash-shell-cleanup.patch"
+SHELL_PATCH_FILE="$SCRIPT_DIR/.okf/swarmforge/patches/bash-shell-cleanup.patch"
 if [[ -f "$SHELL_PATCH_FILE" && -f "$SCRIPT_DIR/swarmforge/scripts/swarmforge.bb" ]]; then
   if grep -q '&!; exit' "$SCRIPT_DIR/swarmforge/scripts/swarmforge.bb"; then
     patch --batch --forward --silent -p0 < "$SHELL_PATCH_FILE"
   fi
 fi
 
-export SWARMFORGE_AGENT_ADAPTER="${SWARMFORGE_AGENT_ADAPTER:-$SCRIPT_DIR/.okf-gen/swarmforge/adapters/opencode2}"
+export SWARMFORGE_AGENT_ADAPTER="${SWARMFORGE_AGENT_ADAPTER:-$SCRIPT_DIR/.okf/swarmforge/adapters/opencode2}"
 
 exec "$SCRIPT_DIR/swarmforge/scripts/swarmforge.sh" "$@"

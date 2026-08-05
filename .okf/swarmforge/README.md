@@ -1,8 +1,16 @@
-# Swarm Forge starter configuration
-
-This directory contains project-neutral configuration inputs. Copy the chosen
-pack into a destination project's `swarmforge/` directory, then customize the
-local articles and role prompts for that project.
+---
+type: WorkflowIntegration
+title: Swarm Forge starter configuration
+description: 'Project-neutral Swarm Forge inputs: packs, adapters, patches, and role prompts.'
+tags: [swarm-forge, orchestration, config]
+status: stable
+generated:
+  by: opencode/opencode
+  at: 2026-08-05T00:00:00Z
+verified:
+  - by: human:adazungu
+    at: 2026-08-05T00:00:00Z
+---
 
 # Choose a pack
 
@@ -16,24 +24,12 @@ The configurations use the backend-neutral `adapter` identifier. Apply
 then set `SWARMFORGE_AGENT_ADAPTER` to the project adapter executable. The
 bundle includes `adapters/opencode2` as the first-class OpenCode2 adapter.
 
-The adapter can be smoke-tested without launching an agent:
+# Select the role model
 
-```bash
-SWARMFORGE_AGENT_DRY_RUN=1 \
-  SWARMFORGE_AGENT_ADAPTER="$PWD/swarmforge/adapters/opencode2" \
-  "$PWD/swarmforge/adapters/opencode2" \
-  --role coder \
-  --worktree "$PWD" \
-  --prompt-file "$PWD/.swarmforge/prompts/coder.md" \
-  --display-name "SwarmForge Coder" \
-  --receive-mode task
-```
-
-# Selecting the role model
-
-The `adapters/opencode2` adapter launches interactive `opencode2 mini` sessions
-so Swarm Forge helper scripts (`ready_for_next.sh`, `done_with_current.sh`)
-keep working inside the agent panes. The model is chosen explicitly:
+The `adapters/opencode2` adapter launches interactive `opencode2 mini`
+sessions so Swarm Forge helper scripts (`ready_for_next.sh`,
+`done_with_current.sh`) keep working inside the agent panes. The model is
+chosen explicitly:
 
 * Default: `openrouter/deepseek/deepseek-v4-flash-0731#max`
 * `--model <provider/model[#variant]>`: pin any model (and optionally its
@@ -72,17 +68,19 @@ Before `./swarm` creates any tmux sessions, the OpenCode2 adapter checks that
 the installed executable is not older than the migrations recorded in
 `~/.local/share/opencode/opencode-next.db` and that a running OpenCode2 service
 reports the same version. The check is read-only and fails fast with update or
-restart guidance when the executable and database are incompatible.
-# SIMPLIFIED BACKUP
-  # OpenCode2 accepts a prompt and working directory on its top-level command.
-  # Use `mini` (interactive) with an explicit model so every role session runs
-  # the same model as the user's own session (OPENCODE_MODEL), ignoring any
-  # unrelated default in the user config.
-  if [[ -n "${OPENCODE_MODEL:-}" ]]; then
-    exec "$backend" mini --model "$OPENCODE_MODEL" --prompt "$prompt" "$worktree" "${extra_args[@]}"
-  fi
-  exec "$backend" --prompt "$prompt" "$worktree" "${extra_args[@]}"
-fi
+restart guidance when the executable and database are incompatible. The
+adapter can be smoke-tested without launching an agent:
+
+```bash
+SWARMFORGE_AGENT_DRY_RUN=1 \
+  SWARMFORGE_AGENT_ADAPTER="$PWD/swarmforge/adapters/opencode2" \
+  "$PWD/swarmforge/adapters/opencode2" \
+  --role coder \
+  --worktree "$PWD" \
+  --prompt-file "$PWD/.swarmforge/prompts/coder.md" \
+  --display-name "SwarmForge Coder" \
+  --receive-mode task
+```
 
 # Bootstrap operational scripts
 

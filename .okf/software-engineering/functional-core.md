@@ -3,6 +3,13 @@ type: ArchitectureGuideline
 title: Functional core and effect boundaries
 description: Shared `.cljc` policy with thin JVM and browser delivery hosts.
 tags: [cljc, functional-core, effects, desktop, browser]
+status: stable
+generated:
+  by: opencode/opencode
+  at: 2026-08-05T00:00:00Z
+verified:
+  - by: human:adazungu
+    at: 2026-08-05T00:00:00Z
 ---
 
 # Shape

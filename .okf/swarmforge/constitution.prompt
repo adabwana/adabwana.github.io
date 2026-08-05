@@ -1,3 +1,17 @@
+---
+type: Prompt
+title: Swarm Forge constitution
+description: Entry-point instructions for agents reading project-local constitution articles and the knowledge bundle.
+tags: [swarm-forge, constitution, prompt]
+status: stable
+generated:
+  by: opencode/opencode
+  at: 2026-08-05T00:00:00Z
+verified:
+  - by: human:adazungu
+    at: 2026-08-05T00:00:00Z
+---
+
 # Swarm Forge constitution
 
 Read and obey every file in `swarmforge/constitution/articles/` and the active

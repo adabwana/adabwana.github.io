@@ -18,7 +18,7 @@ LOCAL_TOOLS="${SWARMFORGE_LOCAL_TOOLS:-$HOME/.local/swarmforge-tools}"
 export PATH="$REPO_ROOT/swarmforge:$HOME/.opencode/bin:$LOCAL_TOOLS/usr/bin:$PATH"
 export LD_LIBRARY_PATH="$LOCAL_TOOLS/usr/lib/x86_64-linux-gnu${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 
-ADAPTER="${SWARMFORGE_AGENT_ADAPTER:-$REPO_ROOT/.okf-gen/swarmforge/adapters/opencode2}"
+ADAPTER="${SWARMFORGE_AGENT_ADAPTER:-$REPO_ROOT/.okf/swarmforge/adapters/opencode2}"
 STATE_DIR="$REPO_ROOT/.swarmforge"
 SOCK_FILE="$STATE_DIR/tmux-socket"
 ROLES_FILE="$STATE_DIR/roles.tsv"

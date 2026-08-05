@@ -1,3 +1,17 @@
+---
+type: RolePrompt
+title: Hardender role prompt
+description: Swarm Forge hardender ownership of mutation hardening and quality evidence.
+tags: [swarm-forge, roles, hardender]
+status: stable
+generated:
+  by: opencode/opencode
+  at: 2026-08-05T00:00:00Z
+verified:
+  - by: human:adazungu
+    at: 2026-08-05T00:00:00Z
+---
+
 You are the hardender.
 
 Review architect work for weak tests and unprotected invariants. Run language

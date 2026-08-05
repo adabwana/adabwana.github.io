@@ -3,6 +3,13 @@ type: Workflow
 title: Quality gates
 description: Stop/go criteria for each role in every pack.
 tags: [workflow, gates, quality]
+status: stable
+generated:
+  by: opencode/opencode
+  at: 2026-08-05T00:00:00Z
+verified:
+  - by: human:adazungu
+    at: 2026-08-05T00:00:00Z
 ---
 
 # Specifier gate

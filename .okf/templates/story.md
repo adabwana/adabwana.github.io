@@ -3,6 +3,10 @@ type: Template
 title: User story template
 description: Small externally visible behavior slice for a Swarm Forge cycle.
 tags: [template, story, workflow]
+status: draft
+generated:
+  by: human:adazungu
+  at: 2026-08-05T00:00:00Z
 ---
 
 # US-<NN> <short title>
