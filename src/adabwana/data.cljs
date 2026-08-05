@@ -4,24 +4,23 @@
 (def resume-data
   {:name "JARYT SALVO"
    :contact {:email "adazungu@gmail.com"
-             :linkedin "https://www.linkedin.com/in/jaryt-s-703218191/"
-             :github "https://gitlab.com/ds-w-clojure/projects-shell"}
+             :phone "(440) 396-2848"
+             :linkedin "https://www.linkedin.com/in/jaryt-d-s-703218191"
+             :github "https://gitlab.com/ds-w-clojure/projects-shell"
+             :portfolio "https://adabwana.github.io/"}
    :degrees [{:institution "Bowling Green State University"
               :location "Bowling Green, OH"
-              :degrees [{:title "Doctor of Philosophy (PhD)"
-                        :field "Data Science"
-                        :period "2024 – Present"}
-                       {:title "Master of Science"
-                        :field "Analytics"
-                        :gpa "4.0/4.0"
-                        :period "2020 – 2021"}
-                       {:title "Master of Arts"
-                        :field "Cross-Cultural and International Education"
-                        :gpa "4.0/4.0"
-                        :period "2017 – 2018"}
-                       {:title "Bachelor of Science"
-                        :field "Education, Minor in Mathematics"
-                        :period "2011 – 2014"}]}]
+              :degrees [{:title "Master of Science"
+                         :field "Analytics"
+                         :gpa "4.0/4.0"
+                         :period "2020 – 2021"}
+                        {:title "Master of Arts"
+                         :field "Cross-Cultural and International Education"
+                         :gpa "4.0/4.0"
+                         :period "2017 – 2018"}
+                        {:title "Bachelor of Science"
+                         :field "Education, Minor in Mathematics"
+                         :period "2011 – 2014"}]}]
    :teaching-experience [{:institution "Eswatini Medical Christian University"
                          :period "Fall 2023"
                          :courses [{:code "MCS 105"
@@ -43,9 +42,16 @@
                                   :details ["Exploratory data analysis techniques with interactive R programming exercises and visualizations"
                                           "Implemented statistical methods through R scripts covering resistant lines, median polish, and two-way plots"]}
                                  {:code "MCS 415"
-                                  :name "Data Mining"
+                                  :name "Artificial Intelligence II / Data Mining"
                                   :details ["Advanced machine learning algorithms with hands-on implementation using R programming"
                                           "Applied clustering, ensemble methods, and neural networks through guided R script walkthroughs"]}]}
+                        {:institution "Eswatini Medical Christian University"
+                         :period "Oct 2022 – Oct 2023"
+                         :courses [{:code "EMCU"
+                                  :name "Capstone supervision, EMCU TV, and e-journal"
+                                  :details ["Supervised capstone teams through production-minded projects, including a Library Management System for Eswatini's National Library in Mbabane"
+                                          "Led university outreach as executive director of EMCU TV, directing a promotional film and growing institutional visibility on YouTube"
+                                          "Stood up an Electronic Journal website for EMCU scholarly publications"]}]}
                         {:institution "Bowling Green State University"
                          :period "Spring 2017"
                          :courses [{:code "EDFI 2990"
@@ -75,27 +81,31 @@
                                   :name "English Language Arts"
                                   :details ["Taught English in resource-limited settings"
                                           "Led community education initiatives"]}]}]
-   :positions [{:title "Graduate Research Assistant"
-                :period "Spring 2024 – Present"
+   :positions [{:title "Computer Science Teacher (Grades 6-8)"
+                :period "Aug 2025 – Present"
+                :organization "Hudson Memorial School / Hudson School District (SAU 81), NH"
+                :details ["Designed and launched an original Computers 6–8 sequence spanning Microsoft Office Suite, HTML/CSS web development, and functional programming in Clojure"
+                         "Authored the full instructional system from scratch (unit plans, Typst lessons, labs, assessments) with AI-assisted drafting inside Git-reviewed, version-controlled materials"
+                         "Ran project-based capstones that force real delivery: partner websites shipped to the web and an algorithm-teaching final conducted live in the REPL"]}
+               {:title "Graduate Research Assistant"
+                :period "Jan 2024 – Aug 2025"
                 :organization "Center for Justice Research, BGSU"
-                :details ["Developing MLOps pipeline using Meta's Prophet model for tract-level crime forecasting"
-                         "Engineering interactive R Shiny dashboard for visualizing crime patterns across census tracts"
-                         "Implementing automated ETL pipeline for processing daily police records using R and PostgreSQL"
-                         "Conducting statistical analysis of spatial autocorrelation in crime patterns using GeoDa"]}
+                :details ["Built automated cleaning and geocoding ETL pipelines for Toledo Police Department records—cutting manual processing time by ~75%"
+                         "Shipped an interactive R Shiny dashboard of crime and demographic patterns (tract maps, rate/count views, police-sector overlays) for researchers and practitioners"
+                         "Produced tract-level Meta Prophet forecasts across six crime categories and 90+ census tracts on 500K+ records; co-presented at ACJS 2025"]}
                {:title "Computer Science Lecturer"
-                :period "Fall 2022 – Fall 2023"
+                :period "Oct 2022 – Oct 2023"
                 :organization "Eswatini Medical Christian University, Peace Corps Response"
-                :details ["Designed and delivered curriculum for three computer science courses: Computer Foundations, Database Mining, and AI"
-                         "Implemented R-based analytics curriculum covering regression, clustering, and neural networks"
-                         "Created hands-on programming exercises and assessments using R and Google Classroom"
-                         "Mentored students in developing data analysis and programming skills"]} 
-               {:title "Data Analyst"
-                :period "October 2021 – October 2022"
+                :details ["Designed and delivered five undergraduate CS courses—Foundations I & II, Data Mining (EDA), Regression Analysis, and AI/ML—end-to-end (lectures, labs, assessments) via Google Classroom"
+                         "Built an R-based analytics curriculum spanning exploratory data analysis, regression analysis, and AI/ML, with hands-on programming exercises for undergraduates"
+                         "Supervised capstone teams through production-minded projects, including a Library Management System for Eswatini's National Library in Mbabane"
+                         "Led university outreach as executive director of EMCU TV and stood up an Electronic Journal website for scholarly publications"]}
+               {:title "Risk Analytics Specialist"
+                :period "Oct 2021 – Oct 2022"
                 :organization "Risk International"
-                :details ["Developed Power BI dashboards for insurance claims analysis and risk assessment"
-                         "Created automated data pipelines for processing insurance claims using Python and SQL"
-                         "Implemented random forest models for risk assessment and prediction"
-                         "Designed automated ETL workflows for data processing and reporting"]}
+                :details ["Built Einstein, a bespoke Risk Information Management System with custom R charts/tables mimicking Advisen-style reports for policy benchmarking"
+                         "Owned ETL-to-dashboard delivery: SQL transformations through DAX measures into Power BI reports for operational and executive review of multi-line insurance programs"
+                         "Delivered Total Cost of Risk (TCOR) analysis, program reviews, and broker-strategy recommendations that informed client risk decisions"]}
                {:title "Assistant Language Teacher (ALT)"
                 :period "Aug 2018 – Aug 2020"
                 :organization "Japan Exchange and Teaching (JET) Program"
@@ -119,14 +129,44 @@
                        {:topic "Novel Machine Learning Paradigms"
                         :subtopics ["Wolfram's Discrete Rule Array Models and Elementary Cellular Automata"
                                   "Evolutionary Algorithms in Vertically Layered Rule Arrays"]}]
-   :projects [{:title "Tract-Level Crime Forecasting"
-               :period "Jan 2024 – Present"
-               :organization "Bowling Green State University"
-               :url "https://gitlab.com/j.salvo/tract-level-crime-forecasting"
-               :details ["Implemented Meta's Prophet model achieving 85% accuracy in tract-level crime prediction"
-                        "Processed and analyzed 500K+ crime records across 6 categories and 90+ census tracts"
-                        "Developed interactive R Shiny dashboard with real-time updates and filtering capabilities"
-                        "Engineered automated data pipeline reducing manual processing time by 75%"]}
+   :skills [{:cluster "Analytics"
+             :items ["Time-series forecasting (Prophet)" "Regression and model selection"
+                     "Machine learning (RF, clustering, neural nets)"
+                     "Spatio-temporal / geospatial analysis (GeoDa)" "Hypothesis testing"
+                     "EDA" "Feature engineering" "Decision optimization" "Topological data analysis (applied)"]}
+            {:cluster "Data & BI"
+             :items ["SQL" "ETL / data pipelines" "Power BI (DAX, RLS)" "Excel" "Tableau"
+                     "Dashboard design" "Database modeling" "Root-cause analysis"
+                     "Policy & hours benchmarking systems"]}
+            {:cluster "Programming"
+             :items ["Clojure (Neanderthal, Smile, scicloj/Clay, tablecloth)"
+                     "Python (scikit-learn, PyTorch)"
+                     "R (Caret, Shiny, tidy analytics)"
+                     "Reproducible notebooks (Quarto/Clay)" "Statistical computing"]}
+            {:cluster "AI & Tooling"
+             :items ["Claude Code" "OpenAI Codex" "OpenRouter" "MLOps (DVC, GitHub Actions, MLflow, Airflow)"
+                     "Docker / Dev Containers" "Git" "Typst"]}
+            {:cluster "Collaboration"
+             :items ["Stakeholder communication" "Executive and practitioner briefings"
+                     "Technical training / curriculum design" "Cross-cultural teamwork"
+                     "Change adoption" "Capstone supervision" "Conference presentation (ACJS)"
+                     "Writing for technical and non-technical audiences"]}]
+    :projects [{:title "Tract-Level Crime Forecasting with Prophet"
+                :period "Spring 2025"
+                :organization "Bowling Green State University"
+                :url "https://gitlab.com/j.salvo/tract-level-crime-forecasting"
+                :spotlight true
+                :details ["Implemented Meta's Prophet across six crime categories and 90+ Toledo census tracts on 500K+ records (~85% accuracy in project evaluation), capturing seasonality and holiday effects"
+                         "Paired forecasts with automated ETL and an interactive Shiny surface for practitioner exploration"
+                         "Presented neighborhood-level forecasting methods and policy implications at ACJS 2025"]}
+               {:title "MLOps Pipeline for Brain Tumor Detection (TDA + Deep Learning)"
+                :period "Spring 2024"
+                :organization "Bowling Green State University"
+                :url "https://www.linkedin.com/pulse/yet-another-machine-learning-operations-article-yano-malopa-salvo-tfa5c/"
+                :spotlight true
+                :details ["Built a reproducible training/ops pipeline with DVC and GitHub Actions (framed with Docker / MLflow / Airflow patterns) for clinical imaging models"
+                         "Combined topological data analysis with deep learning for tumor detection; ensemble approach reached ~92% classification accuracy in reported evaluation"
+                         "Added monitoring and retraining hooks aimed at production-minded model lifecycle management"]}
               {:title "Toledo Crimes & Calls Map"
                :period "Jan 2024 – Present"
                :organization "Bowling Green State University"

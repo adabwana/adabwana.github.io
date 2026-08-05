@@ -7,8 +7,10 @@
    [:div.row
     [:div.col-md-12
      [:h1.mb-4 "About Me"]
-     [:p.lead "Ph.D. student in Data Science with a focus on machine learning operations and crime pattern analysis. 
-               Experienced educator with international teaching background."]]]
+     [:p.lead "Analytics professional and educator who turns operational data into clear recommendations. 
+               Combines risk-analytics consulting and applied research with a human-centered leadership style:
+               designing training curricula, coaching non-specialists through technical change, and leading
+               cross-functional work from analysis through delivery."]]]
    
    [:div.row.mt-4
     [:div.col-md-12
@@ -17,6 +19,10 @@
    [:div.row.mt-4
     [:div.col-md-12
      [c/professional-experience (:positions data/resume-data)]]]
+   
+   [:div.row.mt-4
+    [:div.col-md-12
+     [c/skills-section (:skills data/resume-data)]]]
    
    [:div.row.mt-4
     [:div.col-md-12

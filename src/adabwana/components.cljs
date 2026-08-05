@@ -112,6 +112,20 @@
           ^{:key detail}
           [:li detail])]]])])
 
+(defn skills-section [clusters]
+  [:div
+   [:h2 "Technical Skills"]
+   [:div.row
+    (for [cluster clusters]
+      ^{:key (:cluster cluster)}
+      [:div.col-md-6.mb-4
+       [:div.card.h-100
+        [:div.card-body
+         [:h5.card-title (:cluster cluster)]
+         (for [item (:items cluster)]
+           ^{:key item}
+           [:span.badge.bg-light.text-dark.border.me-2.mb-2 item])]]])]])
+
 (defn project-list [projects]
   [:div.row
    (for [project projects]
