@@ -11,7 +11,7 @@ generated:
 
 # US-05 Migrate portfolio to vanilla ClojureScript static site
 
-**Status:** in-implementation
+**Status:** in-hardening
 **Pack:** **full six-pack** (specifier -> coder -> cleaner -> architect ->
 hardender -> QA) — architectural migration with dependency + parity risks.
 **Depends on:** US-01..US-03 (done). US-04 (home teaching restructure) remains
@@ -174,8 +174,112 @@ npx shadow-cljs release static && node target/static/main.js
 python3 -m http.server -d public   # then curl each route
 ```
 
+## Handoff evidence
+
+| Stage | Commit | Result |
+|-------|--------|--------|
+| Specifier | `744d988` | Approved US-05 + ADR-002 (full six-pack) |
+| Coder | `b223b1f` | Implemented pure `static.cljc` generator + Node host, removed framework deps |
+| Cleaner | `2439951` | Cleanup: dead field, dedup links, formatting, lockfile |
+| Architect | `cc66c71` | PASS — boundaries, dependency direction, pure core/host separation, relative links, acyclic graph; evidence in Architecture review below |
+| Hardender | `b63f9fa` | PASS — output parity, link integrity, no-framework guard, data parity + regeneration byte-identical; added 9 hardening specs (negative cases, escaping invariants, link invariants); see Hardening review below |
+| QA | `(this commit)` | PASS — independent user-surface verification over HTTP of all seven static-site feature scenarios; see QA evidence below |
+
+## Hardening review (hardender gate)
+
+Reviewed the committed US-05 state at `7188f0b` (chain `b223b1f` → `2439951` → `cc66c71`).
+
+**Output parity (Static 01/04)** — all four route HTML files exist under `public/`;
+regeneration via `npx shadow-cljs release static && node target/static/main.js` is
+deterministic — each of the four files is byte-identical to the committed version
+(working tree clean after regen).
+
+**Data parity (Static 04)** — `data.cljs` sha256 `bbe8f49b…` is identical to the
+pre-migration `744d988` (pure data moved, not edited). A scripted scan of all 282
+distinct content strings in `data.cljs` found 0 missing from the generated HTML
+(Clojure-structure fragments excluded).
+
+**Link integrity (Static 03)** — all 38 internal hrefs/src across the four pages
+resolve to a real file or directory index; no broken anchors inside generated HTML.
+Served over HTTP: `/`, `/about/`, `/projects/`, `/hms-student-highlights/`,
+`/css/styles.css`, `/img/headshot.jpg`, all three resume PDFs, `404` — all 200.
+
+**No-framework guard (Static 02)** — no `reagent`, `reitit`, `react`, `react-dom`,
+`htmx` in `src/`, `deps.edn`, or `package.json`; zero JS/DOM interop outside
+`core.cljs` (the only host). `htmx.cljs` deleted; `public/js/` no longer tracked.
+
+**Hardening additions** — added 9 behavior-preserving specs to
+`spec/adabwana/static_spec.clj` (negative/error cases for unrepresentable nodes,
+escaping invariants incl. `<script>` and `&` leakage, and nav/relative-href link
+invariants). Suite now 32/32 green; structure-check OK.
+
+**Residual (unchanged from architect, out of scope):** legacy `public/404.html`
+dead SPA redirect, `public/test/index.html` legacy runner (dead `/js/main.js`
+ref), `public/htmx/*.html` orphans. None are linked from any generated route.
+The `/about#presentations` anchor on the home page has no matching target on the
+About page — this is pre-existing content behavior, identical before/after migration,
+so it is parity-preserved and out of hardening scope.
+
+## Architecture review (architect gate)
+
+Reviewed merged HEAD (`cc66c71` = impl `2439951` + accepted spec `5e050e2`).
+
+**Passed gates:**
+
+* **Dependency direction** — `data <- (components, pages, layout) <- routes <- core` is strictly inward; graph is acyclic. `static.cljc` requires only `clojure.string`.
+* **Pure core / host confinement** — `static.cljc` is pure CLJC (`hiccup->html`, relative-href/asset derivation, `page-document`); zero `js/`, DOM, `fs`, or node globals. The only host namespace is `core.cljs`, which reads the route map and writes `public/` via Node `fs`/`path`.
+* **No framework residue** — `reagent`/`reitit`/`react`/`react-dom`/`htmx` absent from `deps.edn`, `package.json`, and `src/`; `htmx.cljs` deleted; `core.cljs` no longer mounts React or uses reitit. Compiled `target/static/main.js` contains no `reagent|reitit|react-dom|htmx` (Static 07). Bundle: 196K.
+* **Single page-render map** — `routes.cljs` `site-pages` + `page-order` drive all routes; a route cannot silently disappear.
+* **Relative links** — generator emits `./`, `../about/`, `../projects/index.html`, `../hms-student-highlights/index.html`; works on GitHub Pages without a router.
+* **Build + tests** — `npx shadow-cljs release static` compiles clean (0 warnings); `clojure -M:test` 23/23 green; `node target/static/main.js` regenerates the four `public/` route files byte-identical to committed.
+* **Served links (Static 03/05)** — `/`, `/about/`, `/projects/`, `/hms-student-highlights/` all 200 `text/html`; every nav/footer/asset href on all four pages resolves 200 (no 404s, redirects to directory indexes only).
+* **Content parity (Static 04)** — data strings (`JARYT SALVO`, `Hudson Memorial School`, `Computers Teacher`, course titles, resume labels) present in generated HTML.
+
+**Residual risk (handed to hardender/QA, out of accepted scope):**
+
+* `public/404.html` still contains a dead reitit-era `window.location.href = '/?path='` redirect — no client router exists to honor `?path=` on this static site. GH Pages will serve this file on 404s. Consider a static-appropriate 404 page in a follow-up.
+* `public/test/index.html` is a legacy Speclj test-runner page loading `/js/main.js` (a deleted bundle → 404). Not linked from any route.
+* `public/htmx/*.html` are orphaned legacy demo fragments using `hx-*` attributes; not referenced by any generated route.
+
+## Verification commands
+
+```bash
+npx shadow-cljs release static && node target/static/main.js
+python3 -m http.server -d public   # then curl each route
+```
+
+## QA evidence (QA gate)
+
+QA verified independently through the real user surface (served static site
+over HTTP, per `qa/procedures/static-site.qa.md`):
+
+* `npx shadow-cljs release static` compiles clean (0 warnings); the Node
+  entrypoint regenerates the four `public/` route files byte-identical to
+  committed (deterministic output).
+* All seven feature scenarios pass. `/`, `/about/`, `/projects/`,
+  `/hms-student-highlights/` each serve 200 `text/html` over HTTP; content
+  renders with JS disabled (curl, zero framework references in HTML or the
+  compiled bundle).
+* All 38 internal hrefs/src resolve (31 direct 200, 7 clean 301-to-200
+  directory redirects); the three `public/resume/*.pdf` endpoints resolve 200
+  as valid PDFs (full 3-page, onepage 1-page, industry 2-page);
+  styles/headshot 200.
+* `data.cljs` sha256 `bbe8f49b` is byte-identical to pre-migration; all US-03
+  content strings (teaching courses + units, student names and project
+  titles) present in the generated pages.
+* Code-level gates: `static.cljc` pure CLJC (only `clojure.string`); `core.cljs`
+  the sole host writer; no event handlers/atoms/`js/` interop in
+  `components`/`pages`/`layout`/`routes`; link/data targets declared once and
+  rendered via helpers; no stale academic resume reference. `clojure -M:test`
+  32/32 green.
+* Residual: legacy `public/404.html` redirect, `public/test/` runner,
+  `public/htmx/*` orphans, and the `/about#presentations` anchor are
+  parity-preserved and out of the accepted scope.
+
 ## Residual risk
 
 * GitHub Pages needs relative paths to work from the `gh-pages` branch —
   generator must emit them; QA verifies served links.
-* `core.cljs`/`htmx.cljs` removal may orphan requires — architect asserts none.
+* `core.cljs`/`htmx.cljs` removal may orphan requires — architect asserts none;
+  legacy `public/` artifacts (404 SPA redirect, test runner, htmx fragments)
+  are listed in the architecture review above as out-of-scope residue for QA.

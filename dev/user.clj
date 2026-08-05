@@ -4,14 +4,11 @@
 
 (defn watch []
   (server/start!)
-  (shadow/watch :app))
+  (shadow/watch :static))
 
 (defn repl []
   (server/start!)
-  (shadow/repl :app))
-
-(defn browser-repl []
-  (shadow/browser-repl))
+  (shadow/repl :static))
 
 (defn stop []
   (server/stop!))
@@ -21,9 +18,7 @@
   (watch))
 
 (println "Dev environment loaded. Available commands:")
-(println "  (user/watch)       - Start development server")
+(println "  (user/watch)       - Recompile :static generator on change")
 (println "  (user/repl)        - Connect to CLJS REPL")
-(println "  (user/browser-repl) - Start a browser REPL")
 (println "  (user/stop)        - Stop development server")
-(println "  (user/restart)     - Restart development server") 
-
+(println "  (user/restart)     - Restart development server")

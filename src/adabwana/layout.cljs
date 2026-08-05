@@ -1,10 +1,13 @@
 (ns adabwana.layout
   (:require [adabwana.data :as data]))
 
-(defn navbar []
+;; Presentation namespace: renders the links map derived by the static
+;; generator. No link derivation lives here.
+
+(defn navbar [{:keys [nav home]}]
   [:nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
    [:div.container
-    [:a.navbar-brand {:href "/"} "Jaryt Salvo"]
+    [:a.navbar-brand {:href home} "Jaryt Salvo"]
     [:button.navbar-toggler
      {:type "button"
       :data-bs-toggle "collapse"
@@ -12,14 +15,10 @@
      [:span.navbar-toggler-icon]]
     [:div#navbarNav.collapse.navbar-collapse
      [:ul.navbar-nav.ms-auto
-      [:li.nav-item
-       [:a.nav-link {:href "/"} "Home"]]
-      [:li.nav-item
-       [:a.nav-link {:href "/about"} "About"]]
-      [:li.nav-item
-       [:a.nav-link {:href "/projects"} "Projects"]]
-      [:li.nav-item
-       [:a.nav-link {:href "/hms-student-highlights"} "Student Highlights"]]]]]])
+      (for [{:keys [label href]} nav]
+        ^{:key label}
+        [:li.nav-item
+         [:a.nav-link {:href href} label]])]]]])
 
 (defn footer []
   (let [{:keys [email github linkedin]} (:contact data/resume-data)]
@@ -36,8 +35,8 @@
          [:a.btn.btn-link {:href linkedin}
           [:i.bi.bi-linkedin]]]]]]]))
 
-(defn layout [page]
+(defn layout [links page]
   [:div
-   [navbar]
-   [page]
+   [navbar links]
+   page
    [footer]])
