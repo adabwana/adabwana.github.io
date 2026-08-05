@@ -11,7 +11,7 @@ generated:
 
 # US-02 Add industry one-page resume + extensible resume styles
 
-**Status:** backlog
+**Status:** done
 **Pack:** trimmed (specifier -> coder -> cleaner -> QA)
 **Depends on:** US-01 (done)
 **Design:** one-page industry resume PDF under `public/resume/`, with the
@@ -79,14 +79,19 @@ be added to the site without code changes.
 * Feature: `features/resume-styles.feature`
 * Procedure: `qa/procedures/resume-styles.qa.md`
 
-## Verification commands
+## Handoff evidence
 
-```bash
-cd ~/Documents/projects/resume/typst && typst compile <one-page industry source>
-npx shadow-cljs release app
-```
+| Stage | Commit | Result |
+|-------|--------|--------|
+| Specifier | `c32de87` / `bf21548` | Spec + feature + QA procedure + gates approved |
+| Coder | `a2fdd28` | Implemented: one-page PDF rendered, `:one-page` entry added, extensible map |
+| Cleaner | `e9742aa` | Cleanup: whitespace, layout get-in destructuring, no behavior change |
+| QA | `669bdc4` | PASS — build clean, 1-page verified, all PDF endpoints 200, data-only gate; refreshed onepage PDF render |
+| Merge | `b751749` | Merged to main; deployed by gh-pages on push |
 
 ## Residual risk
 
-* One-page layout may require trimming content in the typst source (done in
-  the resume workspace, not here); page-count must be verified at render.
+* shadow-cljs release symbol-ordering nondeterminism in `public/js/main.js`
+  (QA observation; no behavior impact).
+* One-page PDF embeds render-time CreationDate; refresh the render whenever
+  resume content changes.
