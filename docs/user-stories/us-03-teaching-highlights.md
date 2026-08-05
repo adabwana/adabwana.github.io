@@ -40,6 +40,8 @@ so the portfolio reflects active classroom practice and real student outcomes.
 * Content (units, purpose) mirrored from the HMS corpus as site data.
 * Shows Jaryt's role: Computers Teacher (Grades 6-8), Hudson Memorial School,
   curriculum built from scratch.
+* The `teaching` data map established here is reused by US-04 (home page
+  "Teaching Experience" card).
 
 ### B. HMS Student Highlights page (single page)
 

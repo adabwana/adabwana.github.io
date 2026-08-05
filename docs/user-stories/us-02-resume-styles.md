@@ -25,11 +25,12 @@ be added to the site without code changes.
 
 ## In scope
 
-* Produce a **one-page industry resume** PDF from the resume workspace
-  (`~/Documents/projects/resume/typst/`). The exact source is either a new
-  one-page variant of `resume_industry.typ` or a dedicated one-page typst
-  file — the deliverable is the rendered one-page *industry* PDF, **not** the
-  AMN file (which stays a reference for one-page style only).
+* Produce a **one-page industry resume** PDF from the resume workspace.
+  The source is `~/Documents/projects/resume/typst/resume_amn_workforce_strategy.typ`,
+  which is a 1-page general industry summary (navy accent, all roles, selected
+  projects, education, skills) — it may be **renamed/generalized** (e.g.
+  `resume_industry_onepage.typ`) but the rendered output is the industry
+  one-pager. The PDF is shipped as the industry one-page resume.
 * Place it under `public/resume/` with a conventional name, e.g.
   `salvo_jaryt_resume_industry_onepage.pdf`.
 * Generalize `resume-downloads` (currently `data.cljs`) to support N resume
@@ -39,15 +40,17 @@ be added to the site without code changes.
 
 ## Out of scope
 
-* The AMN workforce-strategy one-pager as a site asset (reused only as a
-  one-page layout reference).
+* A separate AMN-specific asset on the site (the file is reused, possibly
+  renamed, as the general industry one-pager — not as an "AMN" branded asset).
 * Editing the Typst sources' content (content lives in the resume workspace).
 * The student-highlights page (US-03).
 
 ## Acceptance criteria
 
 * One-page industry PDF exists under `public/resume/` and is linked on the home page.
-* The one-page PDF is exactly 1 page.
+* The one-page PDF is exactly 1 page, rendered from the generalized
+  `resume_amn_workforce_strategy.typ` (renamed to a general industry name in
+  the resume workspace as part of this story).
 * `resume-downloads` supports an arbitrary number of styles with no code
   changes per new entry (data-only extension).
 * Existing industry + full links continue to work (US-01 not regressed).

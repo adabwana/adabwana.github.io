@@ -29,6 +29,7 @@ generated:
 | 1 | US-01 | Refresh resume download PDFs (industry + full) | done | none |
 | 2 | US-02 | Add industry one-page resume download (typst) + extensible resume styles | backlog | US-01 |
 | 3 | US-03 | Current-work (HMS curriculum) + student highlights page | backlog | US-02 |
+| 4 | US-04 | Home-page restructure: Teaching Experience in place of Research Interests (Research Interests → About) | backlog | US-03 |
 
 ## US-02 notes
 
