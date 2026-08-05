@@ -16,10 +16,10 @@
      [:p.lead "Data Scientist & Machine Learning Engineer"]
      [c/contact-info (:contact data/resume-data)]
      [:div.mt-4
-      [:a.btn.btn-outline-primary.me-3 {:href "/resume/salvo_jaryt_resume_industry.pdf" :download true}
-       [:i.bi.bi-file-earmark-pdf.me-2] "Download Industry Resume"]
-      [:a.btn.btn-outline-primary {:href "/resume/salvo_jaryt_resume_academic.pdf" :download true}
-       [:i.bi.bi-file-earmark-pdf.me-2] "Download Academic Resume"]]]]
+      (for [[_ download] data/resume-downloads]
+        ^{:key (:href download)}
+        [:a.btn.btn-outline-primary.me-3 {:href (:href download) :download true}
+         [:i.bi.bi-file-earmark-pdf.me-2] (:label download)])]]]
 
    [:div.row.mt-5
     [:div.col-md-6
