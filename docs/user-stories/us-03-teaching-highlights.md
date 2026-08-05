@@ -125,6 +125,16 @@ so the portfolio reflects active classroom practice and real student outcomes.
 npx shadow-cljs release app
 ```
 
+## Handoff evidence
+
+| Stage | Commit | Result |
+|-------|--------|--------|
+| Specifier | `ca83494` | Spec + feature + QA procedure + source data approved |
+| Coder | `89c5c96` | Implemented: `:teaching`/`:student-highlights` data maps, highlights page + route, teaching section |
+| Cleaner | `e01522b` | Cleanup: unused requires removed, EOF newlines, no behavior change |
+| QA | `e01522b` (verified) | PASS — build clean, all scenarios through rendered UI, 10 links 200 + `target="_blank"`, code gates; no changes needed |
+| Merge | pending | pending |
+
 ## Residual risk
 
 * Student sites are external and may be taken down after the school year;
