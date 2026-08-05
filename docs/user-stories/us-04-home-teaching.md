@@ -12,11 +12,11 @@ generated:
 # US-04 Home restructure: Teaching Experience on home, Research Interests on About
 
 **Status:** backlog
-**Pack:** trimmed (specifier -> coder -> cleaner -> QA)
-**Depends on:** US-03 (backlog) — reuses the HMS teaching/current-work data
-shape introduced there
+**Pack:** three-role (specifier -> coder -> QA)
+**Depends on:** US-05 (done) — established the static-site generator
 **Design:** swap the home page's "Research Interests" card for a "Teaching
-Experience" card; move Research Interests into the About page.
+Experience" card; move Research Interests into the About page. Renders as
+static HTML via the US-05 generator.
 
 ## Story
 
@@ -55,8 +55,8 @@ continue course-work teaching (EMCU).
 * Home page no longer shows a "Research Interests" card.
 * Home page shows a "Teaching Experience" card with HMS courses and EMCU terms.
 * About page shows a "Research Interests" section.
-* `npx shadow-cljs release app` compiles clean; expected strings in
-  `public/js/main.js`.
+* `npx shadow-cljs release static && node target/static/main.js` compiles and
+  regenerates; expected strings in the generated route HTML files.
 
 ## Engineering gates (per .okf/software-engineering/)
 
@@ -79,16 +79,17 @@ continue course-work teaching (EMCU).
 
 ## Feature and QA
 
-* Feature: `features/home-teaching.feature` (new)
-* Procedure: `qa/procedures/home-teaching.qa.md` (new)
+* Feature: `features/home-teaching.feature`
+* Procedure: `qa/procedures/home-teaching.qa.md`
 
 ## Verification commands
 
 ```bash
-npx shadow-cljs release app
+npx shadow-cljs release static && node target/static/main.js
+python3 -m http.server -d public
 ```
 
 ## Residual risk
 
-* HMS course cards depend on US-03's teaching-data shape; if US-03 ships
-  first with a different shape, reconcile here.
+* Teaching Experience cards reuse the `teaching` data shape from US-03/US-05;
+  the generator must re-emit all four routes after the page changes.
