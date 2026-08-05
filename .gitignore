@@ -18,5 +18,9 @@ target/
 !public/
 !public/**/*
 
+# Swarm Forge runtime state
+.swarmforge/
+.worktrees/
+
 spec/
 *.tex
