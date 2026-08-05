@@ -38,3 +38,14 @@ Feature: Vanilla static site generation
     | /about| public/about/index.html|
     | /projects | public/projects/index.html |
     | /hms-student-highlights | public/hms-student-highlights/index.html |
+
+  Scenario: Static 06 generator is a pure CLJC function, host confined to entrypoint
+    Given the static renderer
+    Then static.cljc contains no host, JS, or fs interop
+    And only the core.cljs entrypoint writes files
+
+  Scenario: Static 07 no client entrypoint remains
+    Given the migration
+    Then htmx.cljs is removed from src/
+    And core.cljs contains no reagent or reitit (it hosts static generation)
+    And no compiled globals.out references reagent, reitit, react-dom, or htmx
