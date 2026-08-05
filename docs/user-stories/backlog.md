@@ -30,6 +30,7 @@ generated:
 | 2 | US-02 | Add industry one-page resume download (typst) + extensible resume styles | done | US-01 |
 | 3 | US-03 | Current-work (HMS curriculum) + student highlights page | done | US-02 |
 | 4 | US-04 | Home-page restructure: Teaching Experience in place of Research Interests (Research Interests → About) | backlog | US-03 |
+| 5 | US-05 | Migrate to vanilla ClojureScript static site (no React/Reagami) — full six-pack | backlog | US-04 |
 
 ## US-02 notes
 
@@ -56,6 +57,16 @@ generated:
   courses and their units from the HMS curriculum corpus.
 * Student project links are external GitLab Pages URLs (keep as external
   links; do not vendor student sites).
+
+## US-05 notes (full six-pack)
+
+* Architectural migration to vanilla CLJS static HTML; see
+  `docs/architecture/adr-002-vanilla-static.md` (How this decision was made,
+  including the Reagami evaluation that led us to no-framework static sites).
+* Uses the **full six-pack** because it changes dependency direction and build
+  output (architect + hardender roles applicable).
+* All specifier artifacts (story, feature, QA procedure, ADR) are committed
+  with this revision so the coder is not blocked at handoff.
 
 ## Parallel candidates
 
