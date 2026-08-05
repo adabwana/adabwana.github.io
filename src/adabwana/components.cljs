@@ -60,27 +60,6 @@
        (when (:url pub)
          [:a.btn.btn-sm.btn-outline-secondary {:href (:url pub)} "Read More"])])]])
 
-(defn recent-presentations [presentations]
-  [:div.card.mb-4
-   [:div.card-body
-    [:h2.card-title.mb-4 "Recent Presentations"]
-    [:div.row
-     (for [pres (take 3 presentations)]
-       ^{:key (:title pres)}
-       [:div.col-md-12.mb-4
-        [:div.card
-         [:div.card-body
-          [:h5.card-title (:title pres)]
-          [:p.text-muted (:period pres)]
-          (when (:details pres)
-            [:ul.mt-2
-             (for [detail (:details pres)]
-               ^{:key detail}
-               [:li.small detail])])
-          [:div.mt-3
-           [:a.btn.btn-sm.btn-outline-danger {:href (:url pres) :target "_blank"}
-            [:i.bi.bi-youtube.me-2] "Watch Video"]]]]])]]])
-
 (defn academic-background [degrees]
   [:div
    [:h2 "Academic Background"]
