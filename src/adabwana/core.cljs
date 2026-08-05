@@ -23,12 +23,13 @@
    :styles (s/asset-href route "/css/styles.css")})
 
 (defn- render-page [route]
-  (let [{:keys [title description file view]} (get routes/site-pages route)]
+  (let [{:keys [title description file view]} (get routes/site-pages route)
+        links (links-for route)]
     {:file file
      :html (s/page-document {:title title
                              :description description
-                             :styles-href (:styles (links-for route))}
-                            (s/hiccup->html (layout/layout (links-for route) (view))))}))
+                             :styles-href (:styles links)}
+                            (s/hiccup->html (layout/layout links (view))))}))
 
 (defn generate-site! [output-dir]
   (doseq [route routes/page-order]
