@@ -11,7 +11,7 @@ generated:
 
 # US-05 Migrate portfolio to vanilla ClojureScript static site
 
-**Status:** in-implementation
+**Status:** in-hardening
 **Pack:** **full six-pack** (specifier -> coder -> cleaner -> architect ->
 hardender -> QA) — architectural migration with dependency + parity risks.
 **Depends on:** US-01..US-03 (done). US-04 (home teaching restructure) remains
@@ -182,6 +182,42 @@ python3 -m http.server -d public   # then curl each route
 | Coder | `b223b1f` | Implemented pure `static.cljc` generator + Node host, removed framework deps |
 | Cleaner | `2439951` | Cleanup: dead field, dedup links, formatting, lockfile |
 | Architect | `cc66c71` | PASS — boundaries, dependency direction, pure core/host separation, relative links, acyclic graph; evidence in Architecture review below |
+| Hardender | `b63f9fa` | PASS — output parity, link integrity, no-framework guard, data parity + regeneration byte-identical; added 9 hardening specs (negative cases, escaping invariants, link invariants); see Hardening review below |
+
+## Hardening review (hardender gate)
+
+Reviewed the committed US-05 state at `7188f0b` (chain `b223b1f` → `2439951` → `cc66c71`).
+
+**Output parity (Static 01/04)** — all four route HTML files exist under `public/`;
+regeneration via `npx shadow-cljs release static && node target/static/main.js` is
+deterministic — each of the four files is byte-identical to the committed version
+(working tree clean after regen).
+
+**Data parity (Static 04)** — `data.cljs` sha256 `bbe8f49b…` is identical to the
+pre-migration `744d988` (pure data moved, not edited). A scripted scan of all 282
+distinct content strings in `data.cljs` found 0 missing from the generated HTML
+(Clojure-structure fragments excluded).
+
+**Link integrity (Static 03)** — all 38 internal hrefs/src across the four pages
+resolve to a real file or directory index; no broken anchors inside generated HTML.
+Served over HTTP: `/`, `/about/`, `/projects/`, `/hms-student-highlights/`,
+`/css/styles.css`, `/img/headshot.jpg`, all three resume PDFs, `404` — all 200.
+
+**No-framework guard (Static 02)** — no `reagent`, `reitit`, `react`, `react-dom`,
+`htmx` in `src/`, `deps.edn`, or `package.json`; zero JS/DOM interop outside
+`core.cljs` (the only host). `htmx.cljs` deleted; `public/js/` no longer tracked.
+
+**Hardening additions** — added 9 behavior-preserving specs to
+`spec/adabwana/static_spec.clj` (negative/error cases for unrepresentable nodes,
+escaping invariants incl. `<script>` and `&` leakage, and nav/relative-href link
+invariants). Suite now 32/32 green; structure-check OK.
+
+**Residual (unchanged from architect, out of scope):** legacy `public/404.html`
+dead SPA redirect, `public/test/index.html` legacy runner (dead `/js/main.js`
+ref), `public/htmx/*.html` orphans. None are linked from any generated route.
+The `/about#presentations` anchor on the home page has no matching target on the
+About page — this is pre-existing content behavior, identical before/after migration,
+so it is parity-preserved and out of hardening scope.
 
 ## Architecture review (architect gate)
 
