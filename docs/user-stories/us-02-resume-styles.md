@@ -76,8 +76,8 @@ be added to the site without code changes.
 
 ## Feature and QA
 
-* Feature: `features/resume-styles.feature` (new)
-* Procedure: `qa/procedures/resume-styles.qa.md` (new)
+* Feature: `features/resume-styles.feature`
+* Procedure: `qa/procedures/resume-styles.qa.md`
 
 ## Verification commands
 
