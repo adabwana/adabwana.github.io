@@ -37,6 +37,30 @@ feature before changing code.
 
 ## Result
 
-**Status:** pending
-**Verified by:** pending
-**Date:** pending
+**Status:** PASS (2026-08-05)
+**Verified by:** swarmforge-QA
+**Date:** 2026-08-05
+
+### Evidence
+
+* Build: `npx shadow-cljs release app` compiled clean (exit 0; one benign
+  upstream deprecation warning in spec-tools).
+* HTTP (python3 http.server + SPA fallback, rendered in headless Chromium):
+  - Home `/` renders "Download One-Page Industry Resume", "Download Industry
+    Resume", "Download Full Resume" buttons, each `<a download>` to its PDF.
+  - `/about` renders About Me / Academic Background / Professional Experience /
+    Technical Skills / Teaching Experience.
+  - `/projects` renders Project Spotlight / Technical Projects / Publications &
+    Presentations.
+* PDF endpoints over HTTP all return `200 application/pdf`:
+  - `/resume/salvo_jaryt_resume_industry_onepage.pdf` (1 page)
+  - `/resume/salvo_jaryt_resume_industry.pdf` (2 pages)
+  - `/resume/salvo_jaryt_resume_full.pdf` (3 pages)
+* `resume-downloads` in `data.cljs` has one entry per style (`:one-page`,
+  `:industry`, `:full`); home renders them generically via
+  `resume-download-links` (no per-style branch, no hard-coded new href).
+* New content strings present in `public/js/main.js`; no stale academic resume
+  link in any source file or bundle.
+* QA fix: refreshed `public/resume/salvo_jaryt_resume_industry_onepage.pdf`
+  from today's `typst compile resume_industry_onepage.typ` render (content
+  identical; only embedded CreationDate changed). Page count verified = 1.

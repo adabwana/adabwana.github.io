@@ -4,7 +4,9 @@
 ;; Keys are stable link identifiers; values are button labels paired with the
 ;; site's public asset paths.
 (def resume-downloads
-  {:industry {:label "Download Industry Resume"
+  {:one-page {:label "Download One-Page Industry Resume"
+              :href "/resume/salvo_jaryt_resume_industry_onepage.pdf"}
+   :industry {:label "Download Industry Resume"
               :href "/resume/salvo_jaryt_resume_industry.pdf"}
    :full {:label "Download Full Resume"
           :href "/resume/salvo_jaryt_resume_full.pdf"}})
@@ -365,7 +367,7 @@
                              "Identified 4 distinct customer segments with actionable insights"]}
                    {:title "Regression Analysis: State Spending on Education"
                     :url "https://www.youtube.com/watch?v=oTqLzrN_n4k"
-                    :period "2021" 
+                    :period "2021"
                     :spotlight true
                     :details ["Presented multivariate regression analysis of education funding across 50 states"
                              "Demonstrated model selection and validation techniques"

@@ -9,7 +9,7 @@
     [:div.col-md-12
      [:h1.mb-4 "Projects & Research"]
      [:p.lead "My research focuses on machine learning operations, crime pattern analysis, and functional programming for data science."]]]
-   
+
    [:div.row.mt-4
  [:div.col-md-12
   [:h2 "Project Spotlight"]
@@ -35,13 +35,13 @@
     [:div.col-md-12
      [:h2 "Technical Projects"]
      [c/project-list (:projects data/resume-data)]]]
-    
+
    [:div.row.mt-4
     [:div.col-md-12
      [:h2 "Publications & Presentations"]
      [c/publications-section (:publications data/resume-data)]
      [c/presentations-section (:presentations data/resume-data)]]]
-   
+
    [:div.row.mt-4
     [:div.col-md-12.text-center
      [:div.mt-5
