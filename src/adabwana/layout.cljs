@@ -17,7 +17,9 @@
       [:li.nav-item
        [:a.nav-link {:href "/about"} "About"]]
       [:li.nav-item
-       [:a.nav-link {:href "/projects"} "Projects"]]]]]])
+       [:a.nav-link {:href "/projects"} "Projects"]]
+      [:li.nav-item
+       [:a.nav-link {:href "/hms-student-highlights"} "Student Highlights"]]]]]])
 
 (defn footer []
   (let [{:keys [email github linkedin]} (:contact data/resume-data)]
