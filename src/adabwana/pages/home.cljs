@@ -2,6 +2,12 @@
   (:require [adabwana.data :as data]
             [adabwana.components :as c]))
 
+(defn resume-download-links [downloads]
+  (for [[_ download] downloads]
+    ^{:key (:href download)}
+    [:a.btn.btn-outline-primary.me-3 {:href (:href download) :download true}
+     [:i.bi.bi-file-earmark-pdf.me-2] (:label download)]))
+
 (defn home-page []
   [:div.container.mt-5
    [:div.row.justify-content-center
@@ -15,11 +21,7 @@
                                            :object-fit "fill"}}]]
      [:p.lead "Data Scientist & Machine Learning Engineer"]
      [c/contact-info (:contact data/resume-data)]
-     [:div.mt-4
-      (for [[_ download] data/resume-downloads]
-        ^{:key (:href download)}
-        [:a.btn.btn-outline-primary.me-3 {:href (:href download) :download true}
-         [:i.bi.bi-file-earmark-pdf.me-2] (:label download)])]]]
+     [:div.mt-4 (resume-download-links data/resume-downloads)]]]
 
    [:div.row.mt-5
     [:div.col-md-6

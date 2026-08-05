@@ -1,7 +1,8 @@
 (ns adabwana.data)
 
 ;; Downloadable resume PDFs derived from the Typst sources in the resume workspace.
-;; Keys are stable link identifiers; values are the site's public asset paths.
+;; Keys are stable link identifiers; values are button labels paired with the
+;; site's public asset paths.
 (def resume-downloads
   {:industry {:label "Download Industry Resume"
               :href "/resume/salvo_jaryt_resume_industry.pdf"}
