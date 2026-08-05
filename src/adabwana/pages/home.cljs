@@ -25,7 +25,9 @@
 
    [:div.row.mt-5
     [:div.col-md-6
-     [c/research-interests (:research-interests data/resume-data)]]
+     [c/teaching-current data/teaching]
+     [c/teaching-experience (filter #(= "Eswatini Medical Christian University" (:institution %))
+                                     (:teaching-experience data/resume-data))]]
     [:div.col-md-6
      [c/featured-projects (:projects data/resume-data)]]]
 
