@@ -174,8 +174,47 @@ npx shadow-cljs release static && node target/static/main.js
 python3 -m http.server -d public   # then curl each route
 ```
 
+## Handoff evidence
+
+| Stage | Commit | Result |
+|-------|--------|--------|
+| Specifier | `744d988` | Approved US-05 + ADR-002 (full six-pack) |
+| Coder | `b223b1f` | Implemented pure `static.cljc` generator + Node host, removed framework deps |
+| Cleaner | `2439951` | Cleanup: dead field, dedup links, formatting, lockfile |
+| Architect | `cc66c71` | PASS — boundaries, dependency direction, pure core/host separation, relative links, acyclic graph; evidence in Architecture review below |
+
+## Architecture review (architect gate)
+
+Reviewed merged HEAD (`cc66c71` = impl `2439951` + accepted spec `5e050e2`).
+
+**Passed gates:**
+
+* **Dependency direction** — `data <- (components, pages, layout) <- routes <- core` is strictly inward; graph is acyclic. `static.cljc` requires only `clojure.string`.
+* **Pure core / host confinement** — `static.cljc` is pure CLJC (`hiccup->html`, relative-href/asset derivation, `page-document`); zero `js/`, DOM, `fs`, or node globals. The only host namespace is `core.cljs`, which reads the route map and writes `public/` via Node `fs`/`path`.
+* **No framework residue** — `reagent`/`reitit`/`react`/`react-dom`/`htmx` absent from `deps.edn`, `package.json`, and `src/`; `htmx.cljs` deleted; `core.cljs` no longer mounts React or uses reitit. Compiled `target/static/main.js` contains no `reagent|reitit|react-dom|htmx` (Static 07). Bundle: 196K.
+* **Single page-render map** — `routes.cljs` `site-pages` + `page-order` drive all routes; a route cannot silently disappear.
+* **Relative links** — generator emits `./`, `../about/`, `../projects/index.html`, `../hms-student-highlights/index.html`; works on GitHub Pages without a router.
+* **Build + tests** — `npx shadow-cljs release static` compiles clean (0 warnings); `clojure -M:test` 23/23 green; `node target/static/main.js` regenerates the four `public/` route files byte-identical to committed.
+* **Served links (Static 03/05)** — `/`, `/about/`, `/projects/`, `/hms-student-highlights/` all 200 `text/html`; every nav/footer/asset href on all four pages resolves 200 (no 404s, redirects to directory indexes only).
+* **Content parity (Static 04)** — data strings (`JARYT SALVO`, `Hudson Memorial School`, `Computers Teacher`, course titles, resume labels) present in generated HTML.
+
+**Residual risk (handed to hardender/QA, out of accepted scope):**
+
+* `public/404.html` still contains a dead reitit-era `window.location.href = '/?path='` redirect — no client router exists to honor `?path=` on this static site. GH Pages will serve this file on 404s. Consider a static-appropriate 404 page in a follow-up.
+* `public/test/index.html` is a legacy Speclj test-runner page loading `/js/main.js` (a deleted bundle → 404). Not linked from any route.
+* `public/htmx/*.html` are orphaned legacy demo fragments using `hx-*` attributes; not referenced by any generated route.
+
+## Verification commands
+
+```bash
+npx shadow-cljs release static && node target/static/main.js
+python3 -m http.server -d public   # then curl each route
+```
+
 ## Residual risk
 
 * GitHub Pages needs relative paths to work from the `gh-pages` branch —
   generator must emit them; QA verifies served links.
-* `core.cljs`/`htmx.cljs` removal may orphan requires — architect asserts none.
+* `core.cljs`/`htmx.cljs` removal may orphan requires — architect asserts none;
+  legacy `public/` artifacts (404 SPA redirect, test runner, htmx fragments)
+  are listed in the architecture review above as out-of-scope residue for QA.
