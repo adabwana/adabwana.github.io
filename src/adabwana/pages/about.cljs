@@ -26,6 +26,10 @@
 
    [:div.row.mt-4
     [:div.col-md-12
+     [c/teaching-current data/teaching]]]
+
+   [:div.row.mt-4
+    [:div.col-md-12
      [c/teaching-experience (:teaching-experience data/resume-data)]]]
 
    [:div.row.mt-4

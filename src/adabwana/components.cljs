@@ -1,8 +1,12 @@
 (ns adabwana.components
-  (:require [adabwana.data :as data]
-            [adabwana.htmx :as htmx]))
+  (:require [clojure.string :as str]))
 
 ;; Reusable UI Components
+
+(defn external-link [{:keys [href label]}]
+  [:a.btn.btn-sm.btn-outline-primary {:href href :target "_blank"}
+   [:i.bi.bi-box-arrow-up-right.me-2] label])
+
 (defn contact-info [{:keys [email github linkedin]}]
   [:div.mt-4.d-flex.justify-content-center.align-items-center
    [:a.text-decoration-none {:href (str "mailto:" email)}
@@ -179,3 +183,49 @@
            (for [detail (:details course)]
              ^{:key detail}
              [:li detail])]])]])])
+
+(defn teaching-current [teaching]
+  (let [{:keys [role grades school context courses]} teaching]
+    [:div.card.mb-4
+     [:div.card-body
+      [:h2.card-title.mb-2 "Current Teaching Work"]
+      [:h3.card-title.h5 (str role " (" grades ")")]
+      [:p.lead.mb-1 school]
+      [:p.text-muted context]
+      [:div.mt-4
+       (for [course courses]
+         ^{:key (:name course)}
+         [:div.mb-4
+          [:h4.h5.fw-bold (:name course)]
+          [:p.mb-1.text-muted (:subject course)]
+          (when (:overview course)
+            [:p (:overview course)])
+          [:ul.mb-0
+           (for [unit (:units course)]
+             ^{:key (:title unit)}
+             [:li
+              [:strong (:title unit)] " — " (:details unit)])]])]]]))
+
+(defn student-highlights [highlights]
+  (letfn [(trimester-label [k]
+            (-> k name (str/replace "-" " ") str/capitalize))]
+    [:div
+     (for [[year trimesters] highlights]
+       (for [[trimester entries] trimesters]
+         ^{:key (str year trimester)}
+         [:div.card.mb-4
+          [:div.card-header
+           [:h3.h5.mb-0 (str year " · " (trimester-label trimester))]]
+          [:div.card-body.p-0
+           [:div.list-group.list-group-flush
+            (for [entry entries]
+              ^{:key (str (:class entry) (str/join (:students entry)))}
+              [:div.list-group-item
+               [:div.d-flex.w-100.justify-content-between.align-items-center
+                [:h4.h6.mb-0
+                 (str/join " & " (:students entry))]
+                [:span.badge.bg-secondary "Class " (:class entry)]]
+               [:p.mb-1 (:overview entry)]
+               (when (:url entry)
+                 [:div.mt-2
+                  [external-link {:href (:url entry) :label "View Live Project"}]])])]]]))]))
