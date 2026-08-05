@@ -21,13 +21,13 @@
 (defn init []
   ;; Initialize HTMX
   (htmx/init-htmx)
-  
+
   ;; Start router
   (rfe/start!
    (rf/router routes/routes {:data {:coercion rcs/coercion}})
    (fn [m] (reset! current-page (when m (layout/layout (:view (:data m))))))
    {:use-fragment false})
-  
+
   ;; Render application
   (let [root-el (js/document.getElementById "app")]
     (rdom/render [#(if @current-page

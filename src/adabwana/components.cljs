@@ -7,7 +7,7 @@
   [:div.mt-4.d-flex.justify-content-center.align-items-center
    [:a.text-decoration-none {:href (str "mailto:" email)}
     [:i.bi.bi-envelope.me-2]
-    email] 
+    email]
    [:span.mx-3 "|"]
    [:a.text-decoration-none {:href github}
     [:i.bi.bi-github.me-2]
@@ -113,7 +113,7 @@
       [:div.card.h-100
        [:div.card-body
         [:h5.card-title (:title project)]
-        [:h6.card-subtitle.mb-2.text-muted 
+        [:h6.card-subtitle.mb-2.text-muted
          [:span (:organization project)] [:span " · " (:period project)]]
         [:ul.mt-3
          (for [detail (:details project)]

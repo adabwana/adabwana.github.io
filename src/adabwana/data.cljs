@@ -367,7 +367,7 @@
                              "Identified 4 distinct customer segments with actionable insights"]}
                    {:title "Regression Analysis: State Spending on Education"
                     :url "https://www.youtube.com/watch?v=oTqLzrN_n4k"
-                    :period "2021" 
+                    :period "2021"
                     :spotlight true
                     :details ["Presented multivariate regression analysis of education funding across 50 states"
                              "Demonstrated model selection and validation techniques"

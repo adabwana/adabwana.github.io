@@ -31,7 +31,7 @@
           (j/assoc! node :hx-get url)
           (j/assoc! node :hx-trigger "load")
           (j/assoc! node :hx-target (str "#" target-id))))
-      
+
       :reagent-render
       (fn []
         [:div.htmx-container
@@ -52,4 +52,4 @@
   (init-htmx)
   (p/then (p/delay 500)
           (fn []
-            (handle-htmx-events)))) 
+            (handle-htmx-events))))
