@@ -34,7 +34,8 @@ jobs:
       run: |
         npm install shadow-cljs -g
         npm install
-        npx shadow-cljs release app
+        npx shadow-cljs release static
+        node target/static/main.js
       
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4

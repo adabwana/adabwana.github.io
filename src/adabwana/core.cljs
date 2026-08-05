@@ -1,35 +1,41 @@
 (ns adabwana.core
-  (:require [reagent.dom :as rdom]
-            [reagent.core :as r]
-            [reitit.frontend :as rf]
-            [reitit.frontend.easy :as rfe]
-            [reitit.coercion.spec :as rcs]
+  "Static-site generator host. This is the only namespace that touches the
+  host: it reads the pure page map and writes HTML files under public/."
+  (:require ["fs" :as fs]
+            ["path" :as path]
             [adabwana.routes :as routes]
-            [adabwana.layout :as layout]
-            [adabwana.htmx :as htmx]))
+            [adabwana.static :as s]
+            [adabwana.layout :as layout]))
 
-;; Current page atom
-(defonce current-page (r/atom nil))
+(defn- ensure-dir! [dir]
+  (.mkdirSync fs dir #js {:recursive true}))
 
-;; Loading component
-(defn loading-spinner []
-  [:div.d-flex.justify-content-center.align-items-center {:style {:height "100vh"}}
-   [:div.spinner-border.text-primary {:role "status"}
-    [:span.visually-hidden "Loading..."]]])
+(defn- write-page! [output-dir file document]
+  (let [full (path/join output-dir file)
+        dir (path/dirname full)]
+    (ensure-dir! dir)
+    (.writeFileSync fs full document "utf8")
+    (println "wrote" full)))
 
-;; Initialize function
+(defn- links-for [route]
+  {:nav (s/nav-links routes/site-pages routes/page-order route)
+   :home (s/relative-href route "/")
+   :styles (s/asset-href route "/css/styles.css")})
+
+(defn- render-page [route]
+  (let [{:keys [title description file view]} (get routes/site-pages route)]
+    {:file file
+     :html (s/page-document {:title title
+                             :description description
+                             :styles-href (:styles (links-for route))}
+                            (s/hiccup->html (layout/layout (links-for route) (view))))}))
+
+(defn generate-site! [output-dir]
+  (doseq [route routes/page-order]
+    (let [{:keys [file html]} (render-page route)]
+      (write-page! output-dir file html))))
+
 (defn init []
-  ;; Initialize HTMX
-  (htmx/init-htmx)
-
-  ;; Start router
-  (rfe/start!
-   (rf/router routes/routes {:data {:coercion rcs/coercion}})
-   (fn [m] (reset! current-page (when m (layout/layout (:view (:data m))))))
-   {:use-fragment false})
-
-  ;; Render application
-  (let [root-el (js/document.getElementById "app")]
-    (rdom/render [#(if @current-page
-                    @current-page
-                    [loading-spinner])] root-el)))
+  (let [output-dir (path/join (js/process.cwd) "public")]
+    (generate-site! output-dir)
+    (println "Static site generated under" output-dir)))

@@ -1,7 +1,6 @@
 (ns adabwana.pages.projects
   (:require [adabwana.data :as data]
-            [adabwana.components :as c]
-            [adabwana.htmx :as htmx]))
+            [adabwana.components :as c]))
 
 (defn projects-page []
   [:div.container.mt-5

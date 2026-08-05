@@ -4,18 +4,14 @@
   "private": true,
   "description": "Professional data science portfolio for Jaryt Salvo",
   "scripts": {
-    "watch": "shadow-cljs watch app",
-    "release": "shadow-cljs release app",
+    "watch": "shadow-cljs watch static",
+    "release": "shadow-cljs release static && node target/static/main.js",
     "server": "shadow-cljs server",
-    "clean": "rm -rf target && rm -rf public/js"
+    "serve": "python3 -m http.server --directory public",
+    "clean": "rm -rf target"
   },
   "devDependencies": {
     "shadow-cljs": "^2.28.21"
   },
-  "dependencies": {
-    "highlight.js": "^11.7.0",
-    "htmx.org": "^1.9.5",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
-  }
+  "dependencies": {}
 }
