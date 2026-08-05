@@ -1,7 +1,5 @@
 (ns adabwana.components
-  (:require [adabwana.data :as data]
-            [adabwana.htmx :as htmx]
-            [clojure.string :as str]))
+  (:require [clojure.string :as str]))
 
 ;; Reusable UI Components
 
