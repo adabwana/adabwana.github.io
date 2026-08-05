@@ -1,0 +1,18 @@
+# Project-local article template
+
+## Project shape
+
+* Project language: Clojure/ClojureScript/Clojure `.cljc`.
+* Pure source: `src/<project>/`.
+* Unit/property tests: `test/`.
+* Acceptance features: `features/`.
+* QA procedures/scripts: `qa/`.
+* Generated output: explicitly listed in the project README and ignored.
+
+## Host boundaries
+
+* JVM/desktop host owns windows, drawing, audio, local storage, and OS input.
+* Browser host owns DOM/canvas, browser events, browser storage, and bundling.
+* Shared `.cljc` code owns policy, state, transitions, and event values.
+
+Replace these defaults with the destination project's actual layout.

@@ -1,0 +1,15 @@
+# Shared handoff rules
+
+Use drafts with this shape:
+
+```text
+type: git_handoff
+to: <role>
+priority: NN
+task: <short-stable-task-name>
+commit: <10-character-commit-abbreviation>
+```
+
+Commit first. Let `swarm_handoff.sh` validate and queue the message. Run
+`ready_for_next.sh` to receive work and `done_with_current.sh` when complete.
+Do not write long handoff bodies or manipulate tmux directly.

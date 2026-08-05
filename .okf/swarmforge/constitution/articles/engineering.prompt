@@ -1,0 +1,14 @@
+# Shared engineering rules
+
+* Work in small, reviewable increments.
+* Prefer Babashka for scripts where it fits the project.
+* Prefer the project's established unit-test style; Speclj is a suitable
+  default for Clojure-family projects when no local standard exists.
+* Keep pure `.cljc` code independent of desktop, browser, filesystem, audio,
+  and network details.
+* Separate testable code from GUI/device/environment boundaries.
+* Keep property testing separate from ordinary unit verification.
+* Use APS tools for Gherkin parsing and mutation rather than reimplementing the
+  parser.
+* Do not hand-edit mutation manifests or generated acceptance output.
+* Run verification sequentially when generation and execution share artifacts.

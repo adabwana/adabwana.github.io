@@ -1,0 +1,10 @@
+# Project constitution entry point
+
+Read every project-local constitution article and the active project knowledge
+bundle before accepting work. The active project rules override this generic
+starter where explicitly documented.
+
+Read the design specification, ordered story backlog, active story, relevant
+ADR, feature, QA procedure, and verification commands. Work only in the
+assigned git worktree. Commit before handoff and use the structured handoff
+helper.

@@ -1,0 +1,9 @@
+# Local engineering template
+
+* <project-specific language and formatting command>
+* <project-specific unit-test command>
+* <project-specific acceptance command>
+* <project-specific architecture command>
+* <project-specific property command>
+* <project-specific hardening command>
+* <project-specific generated-artifact rule>

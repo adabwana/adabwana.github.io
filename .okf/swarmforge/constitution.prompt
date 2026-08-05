@@ -1,0 +1,9 @@
+# Swarm Forge constitution
+
+Read and obey every file in `swarmforge/constitution/articles/` and the active
+project knowledge bundle before accepting work. Read the design specification,
+backlog, active story, feature, QA procedure, and verification commands.
+
+Work only in the assigned git worktree. Commit before handoff. Use the file-based
+handoff helper with an exact commit abbreviation. Do not edit runtime handoff
+state or send direct tmux messages.

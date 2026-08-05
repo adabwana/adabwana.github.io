@@ -1,0 +1,38 @@
+--- swarmforge/scripts/swarmforge.bb
++++ swarmforge/scripts/swarmforge.bb
+@@ -166,7 +166,7 @@
+                   (fail! (str red "Error:" reset " Duplicate worktree '" worktree "' in " (:config-file ctx))))
+                 (when (or (str/includes? worktree "/") (#{"." ".."} worktree))
+                   (fail! (str red "Error:" reset " Invalid worktree '" worktree "' for role '" role "'")))
+-                (when-not (#{"claude" "codex" "copilot" "grok"} agent)
++                (when-not (#{"claude" "codex" "copilot" "grok" "adapter"} agent)
+                   (fail! (str red "Error:" reset " Unsupported agent '" agent "' for role '" role "'")))
+                 (when-not (#{"task" "batch"} receive-mode)
+                   (fail! (str red "Error:" reset " Invalid receive mode '" receive-mode "' for role '" role "' on line " line-no ": expected task or batch")))
+@@ -291,7 +291,9 @@
+ 
+ (defn check-backend-dependencies! [ctx]
+   (doseq [agent (map :agent (:roles ctx))]
+-    (check-dependency! agent)))
++    (check-dependency! (if (= agent "adapter")
++                         (or (System/getenv "SWARMFORGE_AGENT_ADAPTER") "opencode2")
++                         agent))))
+ 
+ (defn create-role-session! [ctx session title]
+   (sh "tmux" "-S" (:tmux-socket ctx) "new-session" "-d" "-s" session "-n" agent-window)
+@@ -328,6 +330,7 @@
+         role-script-dir (if (= (str role-worktree) (str (:working-dir ctx)))
+                           (:script-dir ctx)
+                           (fs/path role-worktree "swarmforge" "scripts"))
++        adapter-command (or (System/getenv "SWARMFORGE_AGENT_ADAPTER") "opencode2")
+         prompt-file (fs/path (:prompts-dir ctx) (str role ".md"))
+         base (str "export SWARMFORGE_ROLE=" (sq role)
+                   " && export PATH=" (sq (str role-script-dir)) ":$PATH"
+@@ -338,6 +341,7 @@
+                 (case agent
+                   "claude" (str "claude --append-system-prompt-file " (sq (str prompt-file)) " --permission-mode acceptEdits -n " (sq (str "SwarmForge " display)) " " (extra-args-prefix row) "\"$(cat " (sq (str prompt-file)) ")\"")
+                   "codex" (str "codex -C " (sq (str role-worktree)) " " (extra-args-prefix row) "\"$(cat " (sq (str prompt-file)) ")\"")
++                  "adapter" (str (sq adapter-command) " --role " (sq role) " --worktree " (sq (str role-worktree)) " --prompt-file " (sq (str prompt-file)) " --display-name " (sq (str "SwarmForge " display)) " --receive-mode " (sq (:receive-mode row)) " " (extra-args-prefix row))
+                   "copilot" (str "copilot -C " (sq (str role-worktree)) " --name " (sq (str "SwarmForge " display)) " " (extra-args-prefix row) "-i \"$(cat " (sq (str prompt-file)) ")\"")
+                   "grok" (str "grok --cwd " (sq (str role-worktree)) " " (grok-permission-prefix row) (extra-args-prefix row) "--rules \"$(cat " (sq (str prompt-file)) ")\" --verbatim \"$(cat " (sq (str prompt-file)) ")\"")))
+       (= index 0)

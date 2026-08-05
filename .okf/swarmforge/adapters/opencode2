@@ -1,0 +1,219 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+OPENCODE_SWARM_DEFAULT_MODEL="${OPENCODE_SWARM_DEFAULT_MODEL:-openrouter/deepseek/deepseek-v4-flash-0731#max}"
+
+role=""
+worktree=""
+prompt_file=""
+display_name=""
+receive_mode="task"
+model=""
+use_current=""
+check_only=""
+extra_args=()
+
+while (($# > 0)); do
+  case "$1" in
+    --role)
+      role="$2"
+      shift 2
+      ;;
+    --worktree)
+      worktree="$2"
+      shift 2
+      ;;
+    --prompt-file)
+      prompt_file="$2"
+      shift 2
+      ;;
+    --display-name)
+      display_name="$2"
+      shift 2
+      ;;
+    --receive-mode)
+      receive_mode="$2"
+      shift 2
+      ;;
+    --model)
+      model="$2"
+      shift 2
+      ;;
+    --current)
+      use_current="1"
+      shift
+      ;;
+    --check)
+      check_only="1"
+      shift
+      ;;
+    --help)
+      printf '%s\n' 'Usage: opencode2 --role ROLE --worktree PATH --prompt-file PATH --display-name NAME --receive-mode task|batch [--model MODEL | --current] [args...]'
+      printf '%s\n' '       opencode2 --check'
+      exit 0
+      ;;
+    --)
+      shift
+      extra_args+=("$@")
+      break
+      ;;
+    *)
+      extra_args+=("$1")
+      shift
+      ;;
+  esac
+done
+
+backend="${OPENCODE_BIN:-opencode2}"
+if [[ "$backend" != */* ]]; then
+  backend="$(command -v "$backend" 2>/dev/null || true)"
+fi
+if [[ -z "$backend" || ! -x "$backend" ]]; then
+  echo "OpenCode2 backend not found." >&2
+  echo "Install @opencode-ai/cli@next or set OPENCODE_BIN to the OpenCode2 executable." >&2
+  exit 127
+fi
+
+check_opencode2_compatibility() {
+  local binary_path db_path db_migration binary_migration service_health
+
+  if [[ "$(basename "$backend")" != "opencode2" ]]; then
+    return 0
+  fi
+
+  command -v python3 >/dev/null 2>&1 || {
+    echo "Cannot verify OpenCode2 compatibility: python3 is required." >&2
+    return 1
+  }
+  command -v strings >/dev/null 2>&1 || {
+    echo "Cannot verify OpenCode2 compatibility: strings is required." >&2
+    return 1
+  }
+
+  binary_path="$(command -v "$backend")"
+  if command -v readlink >/dev/null 2>&1; then
+    binary_path="$(readlink -f "$binary_path" 2>/dev/null || printf '%s' "$binary_path")"
+  fi
+  binary_migration="$(strings "$binary_path" 2>/dev/null \
+    | python3 -c 'import re, sys; values = re.findall(r"20[0-9]{12}_[a-zA-Z0-9_-]+", sys.stdin.read()); print(max(values) if values else "")')"
+  if [[ -z "$binary_migration" ]]; then
+    echo "Cannot verify OpenCode2 compatibility: no embedded migration version found." >&2
+    return 1
+  fi
+
+  db_path="${OPENCODE_DB:-$HOME/.local/share/opencode/opencode-next.db}"
+  if [[ -f "$db_path" ]]; then
+    db_migration="$(python3 - "$db_path" 2>/dev/null <<'EOF' || true
+import sqlite3, sys
+
+db = sys.argv[1]
+try:
+    con = sqlite3.connect(f"file:{db}?mode=ro", uri=True)
+    row = con.execute("SELECT max(id) FROM migration").fetchone()
+    con.close()
+    if row and row[0]:
+        print(row[0])
+except Exception:
+    pass
+EOF
+)"
+    if [[ -n "$db_migration" && "$db_migration" > "$binary_migration" ]]; then
+      cat >&2 <<EOF
+OpenCode2 database is newer than the installed executable.
+  executable migration: $binary_migration
+  database migration:   $db_migration
+Update OpenCode2 to a build that includes the database migration, or use a compatible database before launching Swarm Forge.
+EOF
+      return 1
+    fi
+  fi
+
+  service_health="$("$backend" api get /api/health 2>/dev/null || true)"
+  if [[ -n "$service_health" ]]; then
+    if ! python3 - "$service_health" "$backend" <<'EOF'
+import json, subprocess, sys
+
+payload = json.loads(sys.argv[1])
+if payload.get("healthy") is not True:
+    raise SystemExit("OpenCode2 service is not healthy")
+service_version = payload.get("version")
+client_version = subprocess.check_output([sys.argv[2], "--version"], text=True).strip().split()[-1].lstrip("v")
+if service_version and service_version != client_version:
+    raise SystemExit(f"OpenCode2 service version {service_version} does not match executable {client_version}")
+EOF
+    then
+      echo "OpenCode2 service is incompatible with the installed executable; restart or update OpenCode2 before launching Swarm Forge." >&2
+      return 1
+    fi
+  fi
+}
+
+if [[ -n "$check_only" ]]; then
+  check_opencode2_compatibility
+  exit $?
+fi
+
+test -n "$role"
+test -d "$worktree"
+test -r "$prompt_file"
+test -n "$display_name"
+case "$receive_mode" in
+  task|batch) ;;
+  *) echo "invalid receive mode: $receive_mode" >&2; exit 2 ;;
+esac
+
+prompt=$(<"$prompt_file")
+export SWARMFORGE_ROLE="$role"
+export SWARMFORGE_AGENT_WORKTREE="$worktree"
+export SWARMFORGE_AGENT_PROMPT_FILE="$prompt_file"
+export SWARMFORGE_AGENT_DISPLAY_NAME="$display_name"
+export SWARMFORGE_AGENT_RECEIVE_MODE="$receive_mode"
+
+if [[ "${SWARMFORGE_AGENT_DRY_RUN:-0}" == "1" ]]; then
+  printf 'backend=%q worktree=%q role=%q receive_mode=%q prompt_file=%q\n' \
+    "$backend" "$worktree" "$role" "$receive_mode" "$prompt_file"
+  exit 0
+fi
+
+if [[ "$(basename "$backend")" == "opencode2" ]]; then
+  # OpenCode2 accepts a prompt and working directory on its top-level command.
+  # Use `mini` (interactive) with an explicit model. Default is
+  # deepseek-v4-flash-0731; --model MODEL pins an arbitrary model and --current
+  # pins the model used by the user's own opencode2 session.
+  if [[ -n "$model" ]]; then
+    exec "$backend" mini --model "$model" --prompt "$prompt" "$worktree" "${extra_args[@]}"
+  fi
+  if [[ -n "$use_current" ]]; then
+    current_model=""
+    if command -v python3 >/dev/null 2>&1; then
+      current_model="$(python3 - "$HOME" 2>/dev/null <<'EOF' || true
+import json, os, sqlite3, sys
+home = sys.argv[1]
+db = os.path.join(home, ".local/share/opencode/opencode-next.db")
+try:
+    con = sqlite3.connect(f"file:{db}?mode=ro", uri=True)
+    row = con.execute("SELECT model FROM session ORDER BY time_created DESC LIMIT 1").fetchone()
+    con.close()
+    if row and row[0]:
+        m = json.loads(row[0])
+        model = f"{m.get('providerID','')}/{m.get('id','')}"
+        variant = m.get('variant')
+        if variant:
+            model = f"{model}#{variant}"
+        print(model)
+except Exception:
+    pass
+EOF
+)"
+    fi
+    if [[ -n "$current_model" ]]; then
+      exec "$backend" mini --model "$current_model" --prompt "$prompt" "$worktree" "${extra_args[@]}"
+    fi
+    echo "Could not determine the current opencode2 model; falling back to the default model." >&2
+    exec "$backend" mini --model "$OPENCODE_SWARM_DEFAULT_MODEL" --prompt "$prompt" "$worktree" "${extra_args[@]}"
+  fi
+  exec "$backend" mini --model "$OPENCODE_SWARM_DEFAULT_MODEL" --prompt "$prompt" "$worktree" "${extra_args[@]}"
+fi
+
+# Keep the v1 fallback for environments that expose only `opencode`.
+exec "$backend" --auto --prompt "$prompt" "$worktree" "${extra_args[@]}"

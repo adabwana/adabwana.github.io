@@ -1,0 +1,7 @@
+# Local workflow template
+
+* <pack selected for this project>
+* <approval authority and story naming convention>
+* <desktop host QA command>
+* <browser host QA command>
+* <device/network/security exception, if any>

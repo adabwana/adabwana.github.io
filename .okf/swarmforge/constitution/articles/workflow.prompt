@@ -1,0 +1,9 @@
+# Shared workflow rules
+
+* Work on one approved story at a time.
+* The specifier asks questions and obtains approval before coder handoff.
+* Intermediate roles forward the exact committed task state downstream.
+* Preserve the stable task name across the role chain.
+* Batch only independent queued tasks and only in roles configured for batches.
+* The QA terminal broadcast is merge-only.
+* Do not start the next story until the current story is complete.
