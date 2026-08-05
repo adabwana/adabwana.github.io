@@ -23,6 +23,10 @@
 * Both `/resume/*.pdf` URLs return 200 with `application/pdf`.
 * Industry PDF text includes "Hudson Memorial School" and a master's analytics degree; no PhD.
 * Home page has no `/resume/salvo_jaryt_resume_academic.pdf` link.
+* Code-level gate: home-page link targets are declared once in a small data
+  map and rendered by a helper (per `docs/user-stories/us-01-refresh-resume-pdfs.md`
+  engineering gates); no duplicated button markup, no hidden host effects,
+  no stale academic reference in any source file.
 
 ## Failure handling
 

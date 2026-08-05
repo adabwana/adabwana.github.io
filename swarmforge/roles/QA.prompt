@@ -22,6 +22,10 @@ Verify by:
    scenario through the rendered UI (Home, About, Projects routes).
 3. Check the new content strings are present in `public/js/main.js`.
 4. Confirm `public/resume/*.pdf` links resolve.
+5. Re-verify the story's engineering gates at code level: link/data targets
+   declared once and rendered by helpers, no duplicated button markup, no
+   business logic in presentation namespaces, no hidden host effects, and no
+   stale (e.g. academic) references left in any source file.
 
 Reproduce failures before changing code. If QA contradicts the accepted
 specification, stop and ask for clarification. Commit minimal QA fixes and

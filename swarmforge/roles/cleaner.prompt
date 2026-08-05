@@ -16,7 +16,12 @@ names, cohesion, duplication, local complexity, test readability, dead code,
 and testability across `src/adabwana/**`.
 
 Follow the craft rules in `.okf/software-engineering/` (reader-first,
-immutability, small functions). Do not introduce product behavior or make
-high-level architectural decisions. Run `npx shadow-cljs release app` to
-confirm the build stays green, fix any whitespace/formatting issues from the
-coder's commit, commit the cleanup, and hand off the exact commit to QA.
+immutability, small functions). Enforce the story's engineering gates in the
+absence of an architect role: verify clean-architecture boundaries (no
+business logic in presentation namespaces), functional-core honesty (no hidden
+host effects in render code), and make-misuse-difficult (declared data maps
+and helpers instead of duplicated markup or ad-hoc patterns). Do not introduce
+product behavior or make high-level architectural decisions. Run
+`npx shadow-cljs release app` to confirm the build stays green, fix any
+whitespace/formatting issues from the coder's commit, commit the cleanup, and
+hand off the exact commit to QA.

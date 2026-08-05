@@ -21,5 +21,12 @@ routing in `routes.cljs`, and keep host/JS interop out of pure data. Verify
 your changes by running `npx shadow-cljs release app` and confirming the
 relevant strings appear in `public/js/main.js`.
 
+Apply the project's engineering gates from `.okf/software-engineering/`
+(reader-first Clean Code, clean-architecture boundaries, functional core
+without hidden effects, immutability, make-misuse-difficult): declare derived
+link/data maps in one place and render them with small helpers rather than
+duplicating markup or ad-hoc string patterns. Do not add business logic to
+presentation namespaces.
+
 Commit only after the build passes and hand off the exact commit to the
 cleaner or QA.
