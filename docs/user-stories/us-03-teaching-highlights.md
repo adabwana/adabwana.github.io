@@ -116,8 +116,8 @@ so the portfolio reflects active classroom practice and real student outcomes.
 
 ## Feature and QA
 
-* Feature: `features/hms-student-highlights.feature` (new)
-* Procedure: `qa/procedures/hms-student-highlights.qa.md` (new)
+* Feature: `features/hms-student-highlights.feature`
+* Procedure: `qa/procedures/hms-student-highlights.qa.md`
 
 ## Verification commands
 
