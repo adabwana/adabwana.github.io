@@ -11,7 +11,7 @@ generated:
 
 # US-05 Migrate portfolio to vanilla ClojureScript static site
 
-**Status:** in-hardening
+**Status:** done
 **Pack:** **full six-pack** (specifier -> coder -> cleaner -> architect ->
 hardender -> QA) — architectural migration with dependency + parity risks.
 **Depends on:** US-01..US-03 (done). US-04 (home teaching restructure) remains
@@ -183,7 +183,8 @@ python3 -m http.server -d public   # then curl each route
 | Cleaner | `2439951` | Cleanup: dead field, dedup links, formatting, lockfile |
 | Architect | `cc66c71` | PASS — boundaries, dependency direction, pure core/host separation, relative links, acyclic graph; evidence in Architecture review below |
 | Hardender | `b63f9fa` | PASS — output parity, link integrity, no-framework guard, data parity + regeneration byte-identical; added 9 hardening specs (negative cases, escaping invariants, link invariants); see Hardening review below |
-| QA | `(this commit)` | PASS — independent user-surface verification over HTTP of all seven static-site feature scenarios; see QA evidence below |
+| QA | `39f5ad3` | PASS — independent user-surface verification over HTTP of all seven static-site feature scenarios; `clojure -M:test` 32/32 green; see QA evidence below |
+| Merge | `4bea407` | Merged to main (full six-pack chain) |
 
 ## Hardening review (hardender gate)
 

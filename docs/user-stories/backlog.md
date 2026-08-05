@@ -29,8 +29,8 @@ generated:
 | 1 | US-01 | Refresh resume download PDFs (industry + full) | done | none |
 | 2 | US-02 | Add industry one-page resume download (typst) + extensible resume styles | done | US-01 |
 | 3 | US-03 | Current-work (HMS curriculum) + student highlights page | done | US-02 |
-| 4 | US-04 | Home-page restructure: Teaching Experience in place of Research Interests (Research Interests → About) | backlog | US-03 |
-| 5 | US-05 | Migrate to vanilla ClojureScript static site (no React/Reagami) — full six-pack | backlog | US-04 |
+| 4 | US-04 | Home-page restructure: Teaching Experience in place of Research Interests (Research Interests → About) | backlog | US-05 |
+| 5 | US-05 | Migrate to vanilla ClojureScript static site (no React/Reagami) — full six-pack | done | US-04 |
 
 ## US-02 notes
 
@@ -67,6 +67,9 @@ generated:
   output (architect + hardender roles applicable).
 * All specifier artifacts (story, feature, QA procedure, ADR) are committed
   with this revision so the coder is not blocked at handoff.
+* Done per the full-chain evidence in `docs/user-stories/us-05-vanilla-static.md`.
+  US-04 (home teaching restructure) was re-sequenced to depend on US-05; it is
+  next.
 
 ## Parallel candidates
 
