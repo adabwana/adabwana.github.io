@@ -1,0 +1,41 @@
+# Project constitution (adabwana.github.io)
+
+Read the OKF knowledge bundle (`.okf/`) before accepting work — engineering
+rules (`.okf/software-engineering/`), workflow (`.okf/workflow/`), and the
+bundle index (`.okf/index.md`). The active story, feature, and QA procedure
+override generic defaults where explicitly documented.
+
+Work only in the assigned git worktree. Commit before handoff. Use the
+file-based handoff helper (`swarm_handoff.sh`) with an exact commit
+abbreviation. Do not edit runtime handoff state or send direct tmux messages.
+
+# Project shape
+
+* Language: ClojureScript; single-page app (Reagent, reitit, htmx, Bootstrap).
+* Build: shadow-cljs (`npx shadow-cljs release app`); dev `npm run watch`.
+* Source: `src/adabwana/` — `data.cljs` (content), `components.cljs`
+  (presentation), `pages/` (routes), `routes.cljs`, `core.cljs` (init).
+* Deployment: GitHub Pages via `.github/workflows/gh-pages.yml` on `main` push.
+* Content source of truth: `~/Documents/projects/resume/resume/atoms/**` plus
+  `resume/assemblies/*.yaml`. The site mirrors the selected assembly.
+* Generated output: `public/js/` (shadow-cljs build) is disposable and rebuilt
+  by CI; `public/resume/*.pdf` are derived artifacts.
+* Repo layout: `.okf/` is the reusable knowledge bundle (v0.2); `swarmforge/`
+  is project-local orchestration config.
+
+# Boundaries
+
+* `data.cljs` holds plain immutable content — no rendering, no JS interop.
+* `components.cljs` / `pages/` render — no business logic.
+* Keep host/JS interop out of pure data and out of components where possible.
+* Do not commit secrets; keep derived bundles on the `gh-pages` deploy anyway.
+
+# Workflow
+
+* One approved story at a time; use the trimmed chain
+  specifier -> coder -> cleaner -> QA.
+* The specifier asks questions and obtains user approval before coder handoff.
+* Roles forward the exact committed task state downstream; preserve the stable
+  task name across the chain.
+* The QA terminal broadcast is merge-only. Do not start the next story until
+  the current story is complete.

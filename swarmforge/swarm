@@ -1,0 +1,44 @@
+#!/usr/bin/env zsh
+# Project launcher for the trimmed swarmforge chain.
+# Bootstraps upstream scripts into swarmforge/scripts/ on first run, applies
+# the generic-agent-adapter + bash-shell-cleanup patches from the .okf bundle,
+# sets the adapter, and hands control to the upstream swarmforge.sh.
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"        # <repo>/swarmforge
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"          # <repo>
+
+TOOLS="$HOME/.local/swarmforge-tools"
+if [[ -d "$TOOLS/usr/bin" ]]; then
+  export PATH="$TOOLS/usr/bin:$HOME/.opencode/bin:$PATH"
+  export LD_LIBRARY_PATH="$TOOLS/usr/lib/x86_64-linux-gnu${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+else
+  export PATH="$SCRIPT_DIR/scripts:$HOME/.opencode/bin:$PATH"
+fi
+
+# Bootstrap upstream scripts into <repo>/swarmforge/scripts on first run.
+if [[ ! -d "$SCRIPT_DIR/scripts" || ! -d "$SCRIPT_DIR/scripts/shared-articles" ]]; then
+  TMP_DIR="$(mktemp -d)"
+  ARCHIVE_URL="${SWARMFORGE_SCRIPTS_URL:-https://github.com/unclebob/swarm-forge/archive/refs/heads/main.tar.gz}"
+  curl -L "$ARCHIVE_URL" | tar -xz --strip-components=1 -C "$TMP_DIR"
+  mkdir -p "$SCRIPT_DIR"
+  [[ -d "$SCRIPT_DIR/scripts" ]] || cp -R "$TMP_DIR/swarmforge/scripts" "$SCRIPT_DIR/scripts"
+  if [[ -d "$TMP_DIR/swarmforge/constitution/articles" ]]; then
+    mkdir -p "$SCRIPT_DIR/scripts/shared-articles"
+    cp -R "$TMP_DIR/swarmforge/constitution/articles/." "$SCRIPT_DIR/scripts/shared-articles/"
+  fi
+  rm -rf "$TMP_DIR"
+
+  # Apply bundle patches idempotently.
+  if ! grep -q '"adapter"' "$SCRIPT_DIR/scripts/swarmforge.bb"; then
+    command -v patch >/dev/null 2>&1 || { echo "patch required" >&2; exit 1; }
+    ( cd "$SCRIPT_DIR/scripts" && patch --batch --forward --silent -p2 < "$SCRIPT_DIR/../.okf/swarmforge/patches/generic-agent-adapter.patch" )
+  fi
+  if grep -q '&!; exit' "$SCRIPT_DIR/scripts/swarmforge.bb"; then
+    ( cd "$SCRIPT_DIR/scripts" && patch --batch --forward --silent -p2 < "$SCRIPT_DIR/../.okf/swarmforge/patches/bash-shell-cleanup.patch" )
+  fi
+fi
+
+export SWARMFORGE_AGENT_ADAPTER="${SWARMFORGE_AGENT_ADAPTER:-$SCRIPT_DIR/../.okf/swarmforge/adapters/opencode2}"
+
+exec "$SCRIPT_DIR/scripts/swarmforge.sh" "$@"
