@@ -188,31 +188,42 @@
 
 (defn courses-taught-section [courses]
   (let [current (filterv #(= :current (:category %)) courses)
-        prior (filterv #(= :prior (:category %)) courses)]
+        prior (filterv #(= :prior (:category %)) courses)
+        future (filterv #(= :future (:category %)) courses)]
     [:div
      (course-list "Current Teaching Work" current)
+     (course-list "Upcoming Courses" future)
      (course-list "Teaching Experience" prior)]))
+
+(defn- student-entry [entry]
+  [:div.list-group-item
+   [:div.d-flex.w-100.justify-content-between.align-items-center
+    [:h5.h6.mb-0 (str/join " & " (:students entry))]
+    [:span.badge.bg-secondary "Class " (:class entry)]]
+   [:p.mb-1 (:overview entry)]
+   (when (:url entry)
+     [:div.mt-2
+      [external-link {:href (:url entry) :label "View Live Project"}]])])
 
 (defn student-highlights [highlights]
   (letfn [(trimester-label [k]
             (-> k name (str/replace "-" " ") str/capitalize))]
     [:div
-     (for [[year trimesters] highlights]
-       (for [[trimester entries] trimesters]
-         ^{:key (str year trimester)}
-         [:div.card.mb-4
-          [:div.card-header
-           [:h3.h5.mb-0 (str year " · " (trimester-label trimester))]]
-          [:div.card-body.p-0
-           [:div.list-group.list-group-flush
-            (for [entry entries]
-              ^{:key (str (:class entry) (str/join (:students entry)))}
-              [:div.list-group-item
-               [:div.d-flex.w-100.justify-content-between.align-items-center
-                [:h4.h6.mb-0
-                 (str/join " & " (:students entry))]
-                [:span.badge.bg-secondary "Class " (:class entry)]]
-               [:p.mb-1 (:overview entry)]
-               (when (:url entry)
-                 [:div.mt-2
-                  [external-link {:href (:url entry) :label "View Live Project"}]])])]]]))]))
+     (for [[school years] highlights]
+       ^{:key school}
+       [:div.mb-5
+        [:h2.mb-3 school]
+        (for [[year trimesters] years]
+          ^{:key (str school year)}
+          [:div.mb-4
+           [:h3.h5.mb-3 year]
+           (for [[trimester entries] trimesters]
+             ^{:key (str year trimester)}
+             [:div.card.mb-4
+              [:div.card-header
+               [:h4.h6.mb-0 (trimester-label trimester)]]
+              [:div.card-body.p-0
+               [:div.list-group.list-group-flush
+                (for [entry entries]
+                  ^{:key (str (:class entry) (str/join (:students entry)))}
+                  (student-entry entry))]]])])])]))

@@ -30,11 +30,11 @@
 
    [:div.row.mt-4
     [:div.col-md-12
-     [c/research-interests research/research-interests]]]
+     [c/courses-taught-section teaching/courses-taught]]]
 
    [:div.row.mt-4
     [:div.col-md-12
-     [c/courses-taught-section teaching/courses-taught]]]
+     [c/research-interests research/research-interests]]]
 
    [:div.row.mt-4
     [:div.col-md-12.text-center

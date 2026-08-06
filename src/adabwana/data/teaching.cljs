@@ -38,12 +38,12 @@
             "The Bakery Project — robot commands, helper functions, DRY code, predicates, sets, and bakery iteration"
             "Algorithms — higher-order functions, pipelines, algorithm choices, tracing, teaching, and live REPL demonstrations"]}
    {:title "PLTW App Creators — App Inventor & Game Design"
-    :category :current
+    :category :future
     :institution "Hudson Memorial School"
     :location "Hudson, NH"
-    :period "Aug 2025 – Present"
+    :period "Trimester 3, 2026-2027"
     :org "Computers Teacher (Grades 6-8)"
-    :overview "An eighth-grade app-development course centered on algorithms, event-driven programming, user interface design, and iterative design."
+    :overview "Upcoming eighth-grade app-development course centered on algorithms, event-driven programming, user interface design, and iterative design."
     :points ["App Creators Foundations — algorithms, event-driven programming, user interface design, variables, conditionals, and data"
             "Game Design — pair programming, loops, lists, and iterative design"
             "Advanced Development — procedures, debugging, and more advanced app features"
