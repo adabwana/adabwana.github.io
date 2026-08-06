@@ -29,7 +29,7 @@ generated:
 | 1 | US-01 | Refresh resume download PDFs (industry + full) | done | none |
 | 2 | US-02 | Add industry one-page resume download (typst) + extensible resume styles | done | US-01 |
 | 3 | US-03 | Current-work (HMS curriculum) + student highlights page | done | US-02 |
-| 4 | US-04 | Home-page restructure: Teaching Experience in place of Research Interests (Research Interests → About) | backlog | US-05 |
+| 4 | US-04 | Home-page restructure: Teaching Experience in place of Research Interests (Research Interests → About) | done | US-05 |
 | 5 | US-05 | Migrate to vanilla ClojureScript static site (no React/Reagami) — full six-pack | done | US-04 |
 
 ## US-02 notes

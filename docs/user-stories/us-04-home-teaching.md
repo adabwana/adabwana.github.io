@@ -3,7 +3,7 @@ type: UserStory
 title: User story US-04
 description: Restructure the home page to feature Teaching Experience, moving Research Interests to About.
 tags: [story, home, teaching, research-interests]
-status: draft
+status: done
 generated:
   by: human:adazungu
   at: 2026-08-05T00:00:00Z
@@ -89,7 +89,40 @@ npx shadow-cljs release static && node target/static/main.js
 python3 -m http.server -d public
 ```
 
+## Handoff evidence
+
+| Stage | Commit | Result |
+|-------|--------|--------|
+| Specifier | `8811d12` | PASS — story, feature, QA procedure, three-role chain |
+| Coder | `c44d36d` | PASS — implementation + tests 32/32 green |
+| QA | (this commit) | PASS — independent user-surface verification over HTTP; see QA evidence below |
+
 ## Residual risk
 
 * Teaching Experience cards reuse the `teaching` data shape from US-03/US-05;
   the generator must re-emit all four routes after the page changes.
+
+## QA evidence (QA gate)
+
+QA verified independently through the real user surface (served static site
+over HTTP, per `qa/procedures/home-teaching.qa.md`):
+
+* `npx shadow-cljs release static` compiles clean (0 warnings); the Node
+  entrypoint regenerates the four `public/` route files byte-identical to the
+  committed output.
+* All five feature scenarios pass. Home `/` shows a "Teaching Experience"
+  area (current HMS teaching via `c/teaching-current` — Computers 6/7/8, PLTW
+  App Creators — plus prior EMCU teaching terms via `c/teaching-experience`
+  filtered to Eswatini Medical Christian University) and **no** "Research
+  Interests" section; About `/about/` shows a "Research Interests" section
+  with all topics/subtopics while degrees, positions, skills, current
+  teaching, and prior teaching all still render.
+* `/`, `/about/`, `/projects/`, `/hms-student-highlights/` each serve 200
+  `text/html` over HTTP with zero reagent/reitit/react-dom/htmx references;
+  the three `public/resume/*.pdf` endpoints resolve 200 as valid PDFs.
+* Code-level gates: `:research-interests` stays pure data in `data.cljs`
+  (declared once) and renders only on About via the `c/research-interests`
+  helper; home reuses existing `c/teaching-current` + `c/teaching-experience`
+  helpers (no duplicated button markup); no business logic or host effects in
+  `components`/`pages`; no stale academic references on home or About.
+* `clojure -M:test` 32/32 green.
