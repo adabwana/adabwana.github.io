@@ -11,7 +11,7 @@ generated:
 
 # US-04 Home restructure: Teaching Experience on home, Research Interests on About
 
-**Status:** backlog
+**Status:** done
 **Pack:** three-role (specifier -> coder -> QA)
 **Depends on:** US-05 (done) — established the static-site generator
 **Design:** swap the home page's "Research Interests" card for a "Teaching
@@ -95,7 +95,8 @@ python3 -m http.server -d public
 |-------|--------|--------|
 | Specifier | `8811d12` | PASS — story, feature, QA procedure, three-role chain |
 | Coder | `c44d36d` | PASS — implementation + tests 32/32 green |
-| QA | (this commit) | PASS — independent user-surface verification over HTTP; see QA evidence below |
+| QA | `9997ae2` | PASS — independent user-surface verification over HTTP; see QA evidence below |
+| Merge | `aeae8fe` | Merged to main (three-role chain) |
 
 ## Residual risk
 
