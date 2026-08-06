@@ -7,7 +7,7 @@
     :items ["Time-series forecasting (Prophet)" "Regression and model selection"
             "Machine learning (RF, clustering, neural nets)"
             "Spatio-temporal / geospatial analysis (GeoDa)" "Hypothesis testing"
-            "EDA" "Feature engineering" "Decision optimization" "Topological data analysis (applied)"]}
+            "EDA" "Feature engineering" "Decision optimization"]}
    {:cluster "Data & BI"
     :items ["SQL" "ETL / data pipelines" "Power BI (DAX, RLS)" "Excel" "Tableau"
             "Dashboard design" "Database modeling" "Root-cause analysis"
@@ -18,7 +18,7 @@
             "R (Caret, Shiny, tidy analytics)"
             "Reproducible notebooks (Quarto/Clay)" "Statistical computing"]}
    {:cluster "AI & Tooling"
-    :items ["Claude Code" "OpenAI Codex" "OpenRouter" "MLOps (DVC, GitHub Actions, MLflow, Airflow)"
+    :items ["OpenCode" "Claude Code" "OpenAI Codex" "OpenRouter" "MLOps (DVC, GitHub Actions, MLflow, Airflow)"
             "Docker / Dev Containers" "Git" "Typst"]}
    {:cluster "Curriculum & Ed Tech"
     :items ["Typst document/review-game/exam authoring"
@@ -46,5 +46,5 @@
    {:cluster "Collaboration"
     :items ["Stakeholder communication" "Executive and practitioner briefings"
             "Technical training / curriculum design" "Cross-cultural teamwork"
-            "Change adoption" "Capstone supervision" "Conference presentation (ACJS)"
+            "Change adoption" "Conference presentation (ACJS)"
             "Writing for technical and non-technical audiences"]}])
