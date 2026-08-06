@@ -20,7 +20,7 @@
              "Combined topological data analysis with deep learning for tumor detection; ensemble approach reached ~92% classification accuracy in reported evaluation"
              "Added monitoring and retraining hooks aimed at production-minded model lifecycle management"]}
    {:title "Toledo Crimes & Calls Map"
-    :period "Jan 2024 – Present"
+    :period "Jan 2024 – Aug 2025"
     :organization "Bowling Green State University"
     :url "https://adabwana.shinyapps.io/MapApp/"
     :details ["Interactive visualization of crime and call data for Toledo, Ohio"
@@ -28,7 +28,7 @@
              "Interactive maps showing crime by census tract"
              "Visualization of demographic changes and crime rates comparison"]}
    {:title "Data Science with Clojure"
-    :period "Jan 2024 – Present"
+    :period "Jan 2024 – Jan 2025"
     :organization "Bowling Green State University"
     :url "https://gitlab.com/ds-w-clojure/projects-shell"
     :spotlight true
