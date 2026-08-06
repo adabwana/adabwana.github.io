@@ -1,10 +1,12 @@
 (ns adabwana.pages.about
   (:require [adabwana.components :as c]
+            [adabwana.data.curriculum :as curriculum]
             [adabwana.data.education :as education]
             [adabwana.data.roles :as roles]
             [adabwana.data.skills :as skills]
             [adabwana.data.research :as research]
-            [adabwana.data.teaching :as teaching]))
+            [adabwana.data.teaching :as teaching]
+            [adabwana.data.tools :as tools]))
 
 (defn about-page []
   [:div.container.mt-5
@@ -27,6 +29,14 @@
    [:div.row.mt-4
     [:div.col-md-12
      [c/skills-section skills/skills]]]
+
+   [:div.row.mt-4
+    [:div.col-md-12
+     [c/curriculum-section curriculum/curriculum]]]
+
+   [:div.row.mt-4
+    [:div.col-md-12
+     [c/tools-section tools/tools]]]
 
    [:div.row.mt-4
     [:div.col-md-12

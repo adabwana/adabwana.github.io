@@ -18,7 +18,7 @@
      [:h1.display-4 contact/full-name]
      [:div.mb-4
       [:img.rounded-circle.shadow {:src "/img/headshot.jpg"
-                                   :alt "Jaryt Salvo"
+                                   :alt "Jaryt D. Salvo"
                                    :style {:width "245px"
                                            :height "300px"
                                            :object-fit "fill"}}]]

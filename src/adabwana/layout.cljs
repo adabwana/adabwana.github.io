@@ -7,7 +7,7 @@
 (defn navbar [{:keys [nav home]}]
   [:nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
    [:div.container
-    [:a.navbar-brand {:href home} "Jaryt Salvo"]
+    [:a.navbar-brand {:href home} "Jaryt D. Salvo"]
     [:button.navbar-toggler
      {:type "button"
       :data-bs-toggle "collapse"
@@ -26,7 +26,7 @@
      [:div.container
       [:div.row
        [:div.col-md-12.text-center
-        [:p "© 2024 Jaryt Salvo - Data Scientist & Machine Learning Engineer"]
+        [:p "© 2024 Jaryt D. Salvo - Data Scientist & Machine Learning Engineer"]
         [:div
          [:a.btn.btn-link {:href (str "mailto:" email)}
           [:i.bi.bi-envelope]]

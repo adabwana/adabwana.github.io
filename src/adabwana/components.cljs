@@ -109,6 +109,38 @@
            ^{:key item}
            [:span.badge.bg-light.text-dark.border.me-2.mb-2 item])]]])]])
 
+(defn curriculum-section [curriculum]
+  [:div
+   [:h2 "Curriculum & Tools"]
+   [:p (:context curriculum)]
+   [:div.row
+    (for [course (:courses curriculum)]
+      ^{:key (:title course)}
+      [:div.col-md-6.mb-4
+       [:div.card.h-100
+        [:div.card-body
+         [:h5.card-title (:title course)]
+         [:h6.card-subtitle.mb-2.text-muted (:subject course)]
+         (for [m (:materials course)]
+           ^{:key m}
+           [:span.badge.bg-light.text-dark.border.me-2.mb-2 m])]]])]])
+
+(defn tools-section [tools]
+  [:div
+   [:h2 "Teaching & Publishing Tools"]
+   [:div.row
+    (for [tool tools]
+      ^{:key (:name tool)}
+      [:div.col-md-6.mb-4
+       [:div.card.h-100
+        [:div.card-body
+         [:h5.card-title (:name tool)]
+         [:p.mb-2 (:what tool)]
+         [:ul.mb-0
+          (for [detail (:details tool)]
+            ^{:key detail}
+            [:li detail])]]]])]])
+
 (defn project-list [projects]
   [:div.row
    (for [project projects]

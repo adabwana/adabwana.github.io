@@ -234,7 +234,7 @@ Reviewed merged HEAD (`cc66c71` = impl `2439951` + accepted spec `5e050e2`).
 * **Relative links** — generator emits `./`, `../about/`, `../projects/index.html`, `../hms-student-highlights/index.html`; works on GitHub Pages without a router.
 * **Build + tests** — `npx shadow-cljs release static` compiles clean (0 warnings); `clojure -M:test` 23/23 green; `node target/static/main.js` regenerates the four `public/` route files byte-identical to committed.
 * **Served links (Static 03/05)** — `/`, `/about/`, `/projects/`, `/hms-student-highlights/` all 200 `text/html`; every nav/footer/asset href on all four pages resolves 200 (no 404s, redirects to directory indexes only).
-* **Content parity (Static 04)** — data strings (`JARYT SALVO`, `Hudson Memorial School`, `Computers Teacher`, course titles, resume labels) present in generated HTML.
+* **Content parity (Static 04)** — data strings (`JARYT D. SALVO`, `Hudson Memorial School`, `Computers Teacher`, course titles, resume labels) present in generated HTML.
 
 **Residual risk (handed to hardender/QA, out of accepted scope):**
 

@@ -142,13 +142,13 @@
 
 (describe "page-document"
   (it "assembles a complete html document"
-    (let [html (s/page-document {:title "About | Jaryt Salvo"
+    (let [html (s/page-document {:title "About | Jaryt D. Salvo"
                                  :description "About page"
                                  :styles-href "../css/styles.css"}
                                 "<main>hi</main>")]
       (should-contain "<!DOCTYPE html>" html)
       (should-contain "<html lang=\"en\">" html)
-      (should-contain "<title>About | Jaryt Salvo</title>" html)
+      (should-contain "<title>About | Jaryt D. Salvo</title>" html)
       (should-contain "href=\"../css/styles.css\"" html)
       (should-contain "<main>hi</main>" html)
       (should-contain "</html>" html))))

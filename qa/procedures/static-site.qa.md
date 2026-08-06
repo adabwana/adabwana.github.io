@@ -74,7 +74,7 @@ changing code.
   and `nav-links`/`asset-href` helpers — each link target declared once.
 * **Content parity (Static 04)** — `src/adabwana/data.cljs` sha256
   `bbe8f49b` is byte-identical to pre-migration commit `744d988`. All four
-  pages contain their expected data strings: home (nav/JARYT SALVO/data
+  pages contain their expected data strings: home (nav/JARYT D. SALVO/data
   scientist), about (Hudson Memorial School, Computers Teacher, BGSU, four
   courses + units), projects (crime/ML/functional programming), and
   hms-student-highlights (all student names incl. Bradley, Jamison, Marcus,

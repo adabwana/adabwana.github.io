@@ -2,7 +2,7 @@
   "name": "adabwana-github-io",
   "version": "0.1.0",
   "private": true,
-  "description": "Professional data science portfolio for Jaryt Salvo",
+  "description": "Professional data science portfolio for Jaryt D. Salvo",
   "scripts": {
     "watch": "shadow-cljs watch static",
     "release": "shadow-cljs release static && node target/static/main.js",
