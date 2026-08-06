@@ -5,6 +5,6 @@
 
 (def resume-downloads
   {:industry {:label "Download Industry Resume"
-              :href "/resume/salvo_jaryt_resume_industry_onepage.pdf"}
-   :full {:label "Download Full Resume"
-          :href "/resume/salvo_jaryt_resume_full.pdf"}})
+              :href "/resume/salvo_jaryt_resume_industry.pdf"}
+   :education {:label "Download Education Resume"
+               :href "/resume/salvo_jaryt_resume_education.pdf"}})
