@@ -27,9 +27,9 @@
      [:div.mt-4 (resume-download-links resume/resume-downloads)]]]
 
    [:div.row.mt-5
-    [:div.col-lg-8
+    [:div.col-md-12.col-60
      [c/courses-taught-section (filterv #(= :current (:category %)) teaching/courses-taught)]]
-    [:div.col-lg-4
+    [:div.col-md-12.col-40
      [c/featured-projects projects/projects]]]
 
    [:div.row.mt-4

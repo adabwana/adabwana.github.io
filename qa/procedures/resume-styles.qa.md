@@ -53,11 +53,10 @@ feature before changing code.
   - `/projects` renders Project Spotlight / Technical Projects / Publications &
     Presentations.
 * PDF endpoints over HTTP all return `200 application/pdf`:
-  - `/resume/salvo_jaryt_resume_industry_onepage.pdf` (1 page)
-  - `/resume/salvo_jaryt_resume_industry.pdf` (2 pages)
+  - `/resume/salvo_jaryt_resume_industry_onepage.pdf` (1 page — the industry resume)
   - `/resume/salvo_jaryt_resume_full.pdf` (3 pages)
-* `resume-downloads` in `data.cljs` has one entry per style (`:one-page`,
-  `:industry`, `:full`); home renders them generically via
+* `resume-downloads` in `data.cljs` has one entry per style (`:industry` =
+  the one-page industry resume, `:full`); home renders them generically via
   `resume-download-links` (no per-style branch, no hard-coded new href).
 * New content strings present in `public/js/main.js`; no stale academic resume
   link in any source file or bundle.

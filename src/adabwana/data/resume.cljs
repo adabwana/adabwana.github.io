@@ -4,9 +4,7 @@
   site's public asset paths.")
 
 (def resume-downloads
-  {:one-page {:label "Download One-Page Industry Resume"
+  {:industry {:label "Download Industry Resume"
               :href "/resume/salvo_jaryt_resume_industry_onepage.pdf"}
-   :industry {:label "Download Industry Resume"
-              :href "/resume/salvo_jaryt_resume_industry.pdf"}
    :full {:label "Download Full Resume"
           :href "/resume/salvo_jaryt_resume_full.pdf"}})

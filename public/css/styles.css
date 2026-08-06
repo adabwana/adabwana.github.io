@@ -112,6 +112,18 @@ code {
   }
 }
 
+/* 60/40 split for the home teaching + featured layout */
+@media (min-width: 992px) {
+  .col-60 {
+    flex: 0 0 60%;
+    max-width: 60%;
+  }
+  .col-40 {
+    flex: 0 0 40%;
+    max-width: 40%;
+  }
+}
+
 /* Animation for page transitions */
 .page-enter {
   opacity: 0;
