@@ -1,6 +1,11 @@
 (ns adabwana.pages.about
-  (:require [adabwana.data :as data]
-            [adabwana.components :as c]))
+  (:require [adabwana.components :as c]
+            [adabwana.data.education :as education]
+            [adabwana.data.roles :as roles]
+            [adabwana.data.skills :as skills]
+            [adabwana.data.research :as research]
+            [adabwana.data.teaching :as teaching]
+            [adabwana.data.teaching-experience :as teaching-experience]))
 
 (defn about-page []
   [:div.container.mt-5
@@ -14,27 +19,27 @@
 
    [:div.row.mt-4
     [:div.col-md-12
-     [c/academic-background (:degrees data/resume-data)]]]
+     [c/academic-background education/degrees]]]
 
    [:div.row.mt-4
     [:div.col-md-12
-     [c/professional-experience (:positions data/resume-data)]]]
+     [c/professional-experience roles/positions]]]
 
    [:div.row.mt-4
     [:div.col-md-12
-     [c/skills-section (:skills data/resume-data)]]]
+     [c/skills-section skills/skills]]]
 
    [:div.row.mt-4
     [:div.col-md-12
-     [c/research-interests (:research-interests data/resume-data)]]]
+     [c/research-interests research/research-interests]]]
 
    [:div.row.mt-4
     [:div.col-md-12
-     [c/teaching-current data/teaching]]]
+     [c/teaching-current teaching/teaching]]]
 
    [:div.row.mt-4
     [:div.col-md-12
-     [c/teaching-experience (:teaching-experience data/resume-data)]]]
+     [c/teaching-experience teaching-experience/teaching-experience]]]
 
    [:div.row.mt-4
     [:div.col-md-12.text-center

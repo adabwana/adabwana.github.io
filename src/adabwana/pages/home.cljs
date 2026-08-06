@@ -1,6 +1,10 @@
 (ns adabwana.pages.home
-  (:require [adabwana.data :as data]
-            [adabwana.components :as c]))
+  (:require [adabwana.components :as c]
+            [adabwana.data.contact :as contact]
+            [adabwana.data.projects :as projects]
+            [adabwana.data.resume :as resume]
+            [adabwana.data.teaching :as teaching]
+            [adabwana.data.teaching-experience :as teaching-experience]))
 
 (defn resume-download-links [downloads]
   (for [[_ download] downloads]
@@ -12,7 +16,7 @@
   [:div.container.mt-5
    [:div.row.justify-content-center
     [:div.col-md-8.text-center
-     [:h1.display-4 (:name data/resume-data)]
+     [:h1.display-4 contact/full-name]
      [:div.mb-4
       [:img.rounded-circle.shadow {:src "/img/headshot.jpg"
                                    :alt "Jaryt Salvo"
@@ -20,16 +24,16 @@
                                            :height "300px"
                                            :object-fit "fill"}}]]
      [:p.lead "Data Scientist & Machine Learning Engineer"]
-     [c/contact-info (:contact data/resume-data)]
-     [:div.mt-4 (resume-download-links data/resume-downloads)]]]
+     [c/contact-info contact/contact]
+     [:div.mt-4 (resume-download-links resume/resume-downloads)]]]
 
    [:div.row.mt-5
     [:div.col-md-6
-     [c/teaching-current data/teaching]
+     [c/teaching-current teaching/teaching]
      [c/teaching-experience (filter #(= "Eswatini Medical Christian University" (:institution %))
-                                     (:teaching-experience data/resume-data))]]
+                                     teaching-experience/teaching-experience)]]
     [:div.col-md-6
-     [c/featured-projects (:projects data/resume-data)]]]
+     [c/featured-projects projects/projects]]]
 
    [:div.row.mt-4
     [:div.col-md-12
@@ -37,7 +41,7 @@
       [:div.card-body
        [:h2.card-title.mb-4 "Video Presentations"]
        [:div.row
-        (for [pres (filter :spotlight (:presentations data/resume-data))]
+        (for [pres (filter :spotlight projects/presentations)]
           ^{:key (:title pres)}
           [:div.col-md-6.mb-4
            [:div.card.h-100
@@ -56,7 +60,7 @@
 
    [:div.row.mt-4
     [:div.col-md-12
-     [c/recent-publications (:publications data/resume-data)]]]
+     [c/recent-publications projects/publications]]]
 
    [:div.row.mt-4
     [:div.col-md-12.text-center

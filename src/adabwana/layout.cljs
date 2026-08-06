@@ -1,5 +1,5 @@
 (ns adabwana.layout
-  (:require [adabwana.data :as data]))
+  (:require [adabwana.data.contact :as contact]))
 
 ;; Presentation namespace: renders the links map derived by the static
 ;; generator. No link derivation lives here.
@@ -21,7 +21,7 @@
          [:a.nav-link {:href href} label]])]]]])
 
 (defn footer []
-  (let [{:keys [email github linkedin]} (:contact data/resume-data)]
+  (let [{:keys [email github linkedin]} contact/contact]
     [:footer.bg-light.py-4.mt-5
      [:div.container
       [:div.row

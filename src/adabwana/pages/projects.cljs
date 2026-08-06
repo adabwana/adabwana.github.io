@@ -1,6 +1,6 @@
 (ns adabwana.pages.projects
-  (:require [adabwana.data :as data]
-            [adabwana.components :as c]))
+  (:require [adabwana.components :as c]
+            [adabwana.data.projects :as projects]))
 
 (defn projects-page []
   [:div.container.mt-5
@@ -13,7 +13,7 @@
     [:div.col-md-12
      [:h2 "Project Spotlight"]
      [:div.row
-      (for [project (filter :spotlight (:projects data/resume-data))]
+      (for [project (filter :spotlight projects/projects)]
         ^{:key (:title project)}
         [:div.col-md-6
          [:div.card.h-100.shadow-sm
@@ -33,13 +33,13 @@
    [:div.row.mt-4
     [:div.col-md-12
      [:h2 "Technical Projects"]
-     [c/project-list (:projects data/resume-data)]]]
+     [c/project-list projects/projects]]]
 
    [:div.row.mt-4
     [:div.col-md-12
      [:h2 "Publications & Presentations"]
-     [c/publications-section (:publications data/resume-data)]
-     [c/presentations-section (:presentations data/resume-data)]]]
+     [c/publications-section projects/publications]
+     [c/presentations-section projects/presentations]]]
 
    [:div.row.mt-4
     [:div.col-md-12.text-center
