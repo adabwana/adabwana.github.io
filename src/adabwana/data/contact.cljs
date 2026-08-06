@@ -2,7 +2,7 @@
   "Personal identity and contact block.
   Mirrors the resume workspace's meta/contact.md.")
 
-(def full-name "JARYT SALVO")
+(def full-name "JARYT D. SALVO")
 
 (def contact
   {:email "adazungu@gmail.com"

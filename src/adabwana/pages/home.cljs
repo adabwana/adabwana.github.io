@@ -3,8 +3,7 @@
             [adabwana.data.contact :as contact]
             [adabwana.data.projects :as projects]
             [adabwana.data.resume :as resume]
-            [adabwana.data.teaching :as teaching]
-            [adabwana.data.teaching-experience :as teaching-experience]))
+            [adabwana.data.teaching :as teaching]))
 
 (defn resume-download-links [downloads]
   (for [[_ download] downloads]
@@ -29,9 +28,7 @@
 
    [:div.row.mt-5
     [:div.col-md-6
-     [c/teaching-current teaching/teaching]
-     [c/teaching-experience (filter #(= "Eswatini Medical Christian University" (:institution %))
-                                     teaching-experience/teaching-experience)]]
+     [c/courses-taught-section teaching/courses-taught]]
     [:div.col-md-6
      [c/featured-projects projects/projects]]]
 

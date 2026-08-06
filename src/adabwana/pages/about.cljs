@@ -4,8 +4,7 @@
             [adabwana.data.roles :as roles]
             [adabwana.data.skills :as skills]
             [adabwana.data.research :as research]
-            [adabwana.data.teaching :as teaching]
-            [adabwana.data.teaching-experience :as teaching-experience]))
+            [adabwana.data.teaching :as teaching]))
 
 (defn about-page []
   [:div.container.mt-5
@@ -35,11 +34,7 @@
 
    [:div.row.mt-4
     [:div.col-md-12
-     [c/teaching-current teaching/teaching]]]
-
-   [:div.row.mt-4
-    [:div.col-md-12
-     [c/teaching-experience teaching-experience/teaching-experience]]]
+     [c/courses-taught-section teaching/courses-taught]]]
 
    [:div.row.mt-4
     [:div.col-md-12.text-center

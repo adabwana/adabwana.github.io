@@ -166,45 +166,32 @@
            [:a.btn.btn-sm.btn-outline-danger {:href (:url pres) :target "_blank"}
             [:i.bi.bi-youtube.me-2] "Watch Video"]]]]])]]])
 
-(defn teaching-experience [experience]
-  [:div
-   [:h2 "Teaching Experience"]
-   (for [term experience]
-     ^{:key (str (:institution term) (:period term))}
-     [:div.card.mb-4
-      [:div.card-body
-       [:h5.card-title (:institution term)]
-       [:h6.card-subtitle.mb-2.text-muted (:period term)]
-       (for [course (:courses term)]
-         ^{:key (:code course)}
-         [:div.mb-3
-          [:h6.mb-2.fw-bold (str (:code course) ": " (:name course))]
-          [:ul
-           (for [detail (:details course)]
-             ^{:key detail}
-             [:li detail])]])]])])
+(defn- course-list [heading courses]
+  (when (seq courses)
+    [:div.mb-4
+     [:h2.mb-3 heading]
+     (for [course courses]
+       ^{:key (str (:title course) (:period course))}
+       [:div.card.mb-4
+        [:div.card-body
+         [:h5.card-title (:title course)]
+         [:h6.card-subtitle.mb-2.text-muted
+          (str (:institution course) " · " (:period course))]
+         (when (:org course)
+           [:h6.card-subtitle.mb-2.text-muted (:org course)])
+         (when (:overview course)
+           [:p.mt-2.mb-1 (:overview course)])
+         [:ul.mt-2
+          (for [point (:points course)]
+            ^{:key point}
+            [:li point])]]])]))
 
-(defn teaching-current [teaching]
-  (let [{:keys [role grades school context courses]} teaching]
-    [:div.card.mb-4
-     [:div.card-body
-      [:h2.card-title.mb-2 "Current Teaching Work"]
-      [:h3.card-title.h5 (str role " (" grades ")")]
-      [:p.lead.mb-1 school]
-      [:p.text-muted context]
-      [:div.mt-4
-       (for [course courses]
-         ^{:key (:name course)}
-         [:div.mb-4
-          [:h4.h5.fw-bold (:name course)]
-          [:p.mb-1.text-muted (:subject course)]
-          (when (:overview course)
-            [:p (:overview course)])
-          [:ul.mb-0
-           (for [unit (:units course)]
-             ^{:key (:title unit)}
-             [:li
-              [:strong (:title unit)] " — " (:details unit)])]])]]]))
+(defn courses-taught-section [courses]
+  (let [current (filterv #(= :current (:category %)) courses)
+        prior (filterv #(= :prior (:category %)) courses)]
+    [:div
+     (course-list "Current Teaching Work" current)
+     (course-list "Teaching Experience" prior)]))
 
 (defn student-highlights [highlights]
   (letfn [(trimester-label [k]
